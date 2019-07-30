@@ -30,7 +30,7 @@ a summary of what we thought NixOps would give us:
   aready doing for some of our testing. The big benefit here is being able to
   declaratively specify how the machine should be built and updated and be
   confident we can rebuild that same machine if ever we need to.
-* Make it easy to use [https://nixos.org/nix/](Nix) to build and deploy to the
+* Make it easy to use [Nix](https://nixos.org/nix/) to build and deploy to the
   server giving us all the confidence that Nix gives us for reliable,
   reproducible building and deploying.
 * Make it easy to reuse the code to deploy other services later on
