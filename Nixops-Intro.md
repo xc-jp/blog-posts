@@ -12,7 +12,7 @@ Background
 Cross Compass is developing a web service built around a software suite
 developed in Haskell with a Ruby on Rails backend and a frontend developed using
 javascript. The Haskell code is already built using Nix while the frontend and
-backend are built for deployment using docker. The application is divided across
+backend are built for deployment using Docker. The application is divided across
 three separate repositories managed by different teams. Code is kept on
 [GitHub](https://github.com) while we use [Buildkite](https://buildkite.com) for
 continuous integration.
