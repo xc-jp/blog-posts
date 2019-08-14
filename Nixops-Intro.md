@@ -9,19 +9,24 @@ our own reference and to help anyone else who may be attempting similar things.
 Background
 ----------
 
-Cross Compass is developing a web service primarily programmed in Haskell with a
-Ruby on Rails backend and a frontend developed using javascript. The Haskell
-code is already built using Nix while the frontend and backend are built for
-deployment using docker. The application is divided across three separate
-repositories managed by different teams. Code is kept on GitHub while we use
-Buildkite for Continuous Integration.
+Cross Compass is developing a web service built around a software suite
+developed in Haskell with a Ruby on Rails backend and a frontend developed using
+React, TypeScript and Webpack. The Haskell code is already built using Nix while the frontend and
+backend are built for deployment using Docker. The application is divided across
+three separate repositories managed by different teams. Code is kept on
+[GitHub](https://github.com) while we use [Buildkite](https://buildkite.com) for
+continuous integration.
 
 To ease testing the application in its fully deployed state, we want two
-servers serving up production and staging versions of the web application. This
-means having Buildkite trigger building the code from the three repositories
-then deploying it to a server somewhere (in our case, GCP).
+servers serving up production and staging versions of the web application.
+In this context, "production" means a production release-ready version of the
+code base, while "staging" means whatever the current `master` branch is
+on GitHub. To that end, we want to trigger a build on Buildkite when any of the
+three repositories is updated (either the master branch or when a release
+is tagged) and we want Buildkite to deploy the fully-built application to GCP.
 
-We decided to go with [NixOps](https://nixos.org/nixops/) for this. Here's
+We decided to go with [NixOps](https://nixos.org/nixops/) for deploying the
+staging and production servers from the Buildkite CI server. Here's
 a summary of what we thought NixOps would give us:
 
 * Use our existing [Nix Cache](https://nixos.org/nix/manual/#ssec-s3-substituter)
@@ -40,7 +45,7 @@ using before and intended to continue using for production deployments. We
 decided that using the same docker deployment wasn't too important for this.
 
 The other main problem is that Nix can be a little hard to break into with
-few good examples to follow. This Blog series will hopefully help a little
+few good examples to follow. This blog series will hopefully help a little
 with that.
 
 Coming Up
