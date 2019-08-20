@@ -54,7 +54,8 @@ Coming Up
 Future blog posts will document the journey to getting automatic deployments of
 our full stack web application to GCE using NixOps. In particular we will cover:
 
-* Passing arguments to NixOps and Fixing NixPkgs
+* Fixing NixPkgs
+* Passing dynamic arguments to NixOps
 * Using NixOps with GCE
 * Getting a Ruby on Rails application to Run Using Nix
 * Defining Systemd Services with NixOS Modules
