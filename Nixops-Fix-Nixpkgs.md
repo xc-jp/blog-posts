@@ -1,44 +1,45 @@
-Fixing NixPkgs in NixOps
+Fixing Nixpkgs in NixOps
 ========================
 
-One of the typical things developers building with Nix will want to do is fix
-the version of Nixpkgs being built against. As a brief introduction, for those
-not already familiar, Nixpkgs is the official repository of Nix derivations
-(the Nix equivalent of dpkg's and rpm's packages). When the version
+When building with Nix, one of the typical things developers will want to do is
+fix the version of Nixpkgs being used. For those not already familiar,
+[Nixpkgs](https://github.com/NixOS/nixpkgs) is the official repository of Nix
+derivations (the Nix equivalent of dpkg's and rpm's packages). When the version
 of Nixpkgs is fixed, it guarantees that the same derivation will build exactly
 the same output every time. This frees developers from being concerned about
-changes in upstream dependencies while developing their applications, or worse,
+changes in upstream dependencies while developing their applications. Or worse,
 dependencies changing and breaking their application after development and
 testing but before building and deploying.
 
-That crucial need to keep the development environment the same as the
+That need to keep the development environment the same as the
 deployment build environment means that if NixOps is to be used for building
 and deploying applications, its Nixpkgs version needs to be fixed to the same
-version fixed during development.
+version used during development.
 
 Fixing Nixpkgs in NixOps is not well documented.
 [The official manual](https://nixos.org/nixops/manual/), sadly, doesn't describe
-how to do it at all. **To summarise, the way it is done is by setting the
+how to do it. **To summarise, it is done by setting the
 `nixpkgs` prefix in the `NIX_PATH` environment variable**. Before describing
-how we did this for our environment I'd like to describe how something similar
-is achieved from within nix and why it's not quite as rigourous as using
+how we did this for our environment, I'd like to describe how something similar
+is achieved from within Nix itself, and why it's not quite as rigourous as using
 `NIX_PATH`.
 
 We'll use a simple NixOS machine with the [dhall](https://dhall-lang.org/)
 package installed to illustrate. I will be assuming a lot of what's already
 covered in [the NixOps Manual](https://nixos.org/nixops/manual/). If a command
-or configuration's purpose is unclear, I recommend checking the manual for
+or configuration setting is unclear, I recommend checking the manual for
 clarification.
 
 First we'll define a simple VirtualBox physical specification to deploy to.
 I've opted for VirtualBox here to keep things simple but the choice of
 platform isn't important to this post. If you want to follow along you can
-install virtualbox and use this physical specification, or you can refer
-to [the NixOps Manual](https://nixos.org/nixops/manual/) on how to repoint
-the physical specification at a different platform you have access to:
+install VirtualBox and use this physical specification, or you can refer
+to [the NixOps Manual](https://nixos.org/nixops/manual/) on how to retarget
+the physical specification to a different platform:
 
-```
-$ cat example-vbox.nix
+`example-vbox.nix`:
+
+```nix
 {
   example =
     { pkgs, ... }:
@@ -49,11 +50,12 @@ $ cat example-vbox.nix
 }
 ```
 
-Then the logical specification of the box to deploy with dhall installed and
-without a fixed NixPkgs:
+The logical specification of the box to deploy with dhall installed and
+without a fixed Nixpkgs:
 
-```
-$ cat example.nix
+`example.nix`:
+
+```nix
 {
   network.description = "Example";
 
@@ -66,7 +68,7 @@ $ cat example.nix
 
 Trying it out:
 
-```
+```console
 $ nixops create -d example ./example.nix example-vbox.nix
 created deployment ‘994abedc-c273-11e9-950b-d89ef34b67c0’
 994abedc-c273-11e9-950b-d89ef34b67c0
@@ -88,12 +90,13 @@ Going forward I will continue the convention introduced above of using a
 `$` prompt when executing commands on the local machine, and a `#` prompt when
 executing commands as root on the deployed virtual machine.
 
-We want to fix nixpkgs supplying `dhall` to a specific version. Let's try that
+We want to fix Nixpkgs to a specific version. Let's try to do it
 the way we ordinarily might when setting up a build environment (I'm pinning to
 an older 18.09 version of nixos for illustration purposes):
 
-```
-$ cat example-2.nix
+`example-2.nix`:
+
+```nix
 let
   nixpkgs_src =
     builtins.fetchTarball {
@@ -116,7 +119,7 @@ in
 
 Redeploy and check the versions:
 
-```
+```console
 $ nixops modify -d example ./example-vbox.nix ./example-2.nix
 $ nixops deploy -d example
 building all machine configurations...
@@ -131,27 +134,30 @@ $ nixops ssh -d example example
 ```
 
 This has successfully changed the version of `dhall` to the one in our pinned
-version of NixPkgs. However, notice that everything else, including bash,
+version of Nixpkgs. However, notice that everything else, including bash,
 remains the same as the unpinned version. What if we want to pin the whole
 operating system?
 
 Our strategy of loading up the nix tarball within `example-2.nix` won't work.
 
-```
+```nix
    { pkgs, ...}:
    { environment.systemPackages = with pkgs; [ fixedpkgs.dhall ];
    };
-
 ```
 
-The above part of the NixOps configuration is a
+The above configuration is a
 [NixOS module](https://nixos.org/nixos/manual/index.html#sec-writing-modules)
-which is defined as a function taking a set including a pkgs attribute and
-producing a NixOS configuration specifying how to build the machine.
-That pkgs attribute is given by NixOps itself. We can use something else in
-cases where we explicitly refer to something in NixPkgs, as we did for our dhall
-installation, but the operating system itself is implicitly built off whatever
-NixOps chose to pass as that `pkgs` attribute.
+which is defined as the following:
+
+- a function taking a set (which includes a `pkgs` attribute)
+- the function produces a NixOS configuration specifying how to build the machine
+
+The `pkgs` attribute is given by NixOps itself. We can use individual packages
+from a different, pinned version of Nixpkgs in cases where we explicitly refer
+to something in Nixpkgs (as we did for our dhall installation).  However, the
+operating system itself is implicitly built off whatever NixOps chose to pass
+as that `pkgs` attribute.
 
 To tell NixOps which Nixpkgs to use, the `NIX_PATH` environment variable must
 be used. Since we're now pinning the Nixpkgs passed as `pkgs`, we'll revert to
@@ -179,15 +185,16 @@ $ nixops ssh -d example example
 ```
 
 And now we see that not just dhall, but the whole operating system has been
-pinned to the version of NixPkgs set in `NIX_PATH`.
+pinned to the version of Nixpkgs set in `NIX_PATH`.
 
 Having to set `NIX_PATH` for every invocation of `nixops deploy` is not very
-user friendly or robust. And we'd like to be able to check our fixed nixpkgs in
+user friendly or robust. And we'd like to be able to check our fixed Nixpkgs in
 to a version control system. So we set up a `shell.nix` to  take care of it all
 for us:
 
-```
-$ cat shell.nix
+`shell.nix`:
+
+```nix
 { config ? {}
 , nixpkgs ? null
 } :
@@ -212,7 +219,13 @@ pkgs.mkShell {
   NIX_PATH = "nixpkgs=" + nixpkgs_src;
   NIXOPS_DEPLOYMENT = "example";
 }
+```
 
+Getting into that Nix shell and redeploying:
+
+```console
+$ nix-shell
+$ # we are now in the above nix shell
 $ nixops deploy
 building all machine configurations...
 [..]
@@ -225,9 +238,12 @@ Now the `NIX_PATH`and the `NIXOPS_DEPLOYMENT` (the equivalent of the
 no longer even need to install `nixops` themselves. So long as they have `nix`
 installed, the shell will take care of ensuring `nixops` is available.
 
+As long as `nix-shell` is run before any `nixops` commands, the correct version
+of Nixpkgs will always be used.
+
 References
 ----------
 
 * [The Official NixOps Manual](https://nixos.org/nixops/manual/)
-* [Discourse discussion on pinning nixpkgs in NixOps](https://discourse.nixos.org/t/nixops-pinning-nixpkgs/734)
-* [Domen Kožar's FAQ on pinning NixPkgs in general](https://nix-cookbook.readthedocs.io/en/latest/faq.html#how-to-pin-nixpkgs-to-a-specific-commit-branch)
+* [Discourse discussion on pinning Nixpkgs in NixOps](https://discourse.nixos.org/t/nixops-pinning-nixpkgs/734)
+* [Domen Kožar's FAQ on pinning Nixpkgs in general](https://nix-cookbook.readthedocs.io/en/latest/faq.html#how-to-pin-nixpkgs-to-a-specific-commit-branch)
