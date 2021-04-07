@@ -4,4 +4,10 @@ Blog Posts README
 This repository contains a series of blog posts intended for posting on the
 Cross Compass website.
 
+https://www.cross-compass.com/magazineページを新設しました/
+
+http://cross-magazine.sub.jp/magazine/
+
+Code: https://github.com/xc-jp/blog-post-code
+
 All content is copyright Cross Compass LLC 2021.
