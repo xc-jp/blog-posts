@@ -120,66 +120,6 @@ right next to it, and start writing. We would be able to create `TopPage.purs`
 which would conflict with `TopPage.tsx` while bundling.
 `TopPage_.js` will not conflict.
 
-## vscode
-
-I recommend these extensions:
-
-* PureScript IDE
-* PureScript Language Support
-* Vim
-* Remote - SSH
-* GitLens
-* Dhall Language Support
-* Nix Environment Selector
-
-## Image inlining
-
-In most bundlers, there is a technique by which one can `import` an image as a `string`,
-so that it gets compiled into inline JavaScript which looks like this:
-
-```javascript
-var spinner = "data:image/png;base64,iVBORw0KGgoAAA.....";
-```
-
-This works, for example, with [rollup.js](http://rollupjs.org) and an appropriately configured `@rollup/plugin-url`.
-
-For this TypeScript:
-
-```typescript
-import spinner from 'assets/spinner.png';
-```
-
-We can accomplish the same thing in PureScript like this:
-
-__Assets.purs__
-
-```haskell
-module Assets where
-foreign import spinner :: String
-```
-
-__Assets.js__
-
-```javascript
-"use strict";
-exports.spinner = require('assets/spinner.png').default;
-```
-
-## CSS
-
-When we want to write inline CSS instead of a stylesheet but we also want to use
-[CSS selector combinators](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors#combinators),
-then we will want to use the older
-[__styled-components__](https://styled-components.com/)
-or the newer, better
-[__emotion__](https://emotion.sh/).
-
-__styled-components__ is not available in PureScript React Basic, but
-[__purescript-react-basic-emotion__](https://pursuit.purescript.org/packages/purescript-react-basic-emotion) is available, and very good. The syntax
-and behavior of __styled-components__ and __emotion__ is almost exactly the
-same, so it’s easy to
-refactor TypeScript with __styled-components__ into PureScript with
-__emotion__.
 
 ## PureScript-TypeScript interop
 
@@ -466,6 +406,67 @@ If we have a PureScript data type which we want to translate the JSON object int
 we can use
 [`Simple.JSON.read'`](https://pursuit.purescript.org/packages/purescript-simple-json/8.0.0/docs/Simple.JSON#v:read').
 to automatically parse the JSON object into our PureScript type.
+
+## vscode
+
+I recommend these extensions:
+
+* PureScript IDE
+* PureScript Language Support
+* Vim
+* Remote - SSH
+* GitLens
+* Dhall Language Support
+* Nix Environment Selector
+
+## Image inlining
+
+In most bundlers, there is a technique by which one can `import` an image as a `string`,
+so that it gets compiled into inline JavaScript which looks like this:
+
+```javascript
+var spinner = "data:image/png;base64,iVBORw0KGgoAAA.....";
+```
+
+This works, for example, with [rollup.js](http://rollupjs.org) and an appropriately configured `@rollup/plugin-url`.
+
+For this TypeScript:
+
+```typescript
+import spinner from 'assets/spinner.png';
+```
+
+We can accomplish the same thing in PureScript like this:
+
+__Assets.purs__
+
+```haskell
+module Assets where
+foreign import spinner :: String
+```
+
+__Assets.js__
+
+```javascript
+"use strict";
+exports.spinner = require('assets/spinner.png').default;
+```
+
+## CSS
+
+When we want to write inline CSS instead of a stylesheet but we also want to use
+[CSS selector combinators](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors#combinators),
+then we will want to use the older
+[__styled-components__](https://styled-components.com/)
+or the newer, better
+[__emotion__](https://emotion.sh/).
+
+__styled-components__ is not available in PureScript React Basic, but
+[__purescript-react-basic-emotion__](https://pursuit.purescript.org/packages/purescript-react-basic-emotion) is available, and very good. The syntax
+and behavior of __styled-components__ and __emotion__ is almost exactly the
+same, so it’s easy to
+refactor TypeScript with __styled-components__ into PureScript with
+__emotion__.
 
 ## Library substitutions
 
