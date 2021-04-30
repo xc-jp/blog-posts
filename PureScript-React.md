@@ -214,7 +214,8 @@ type ArtworksResponse = Record (ArtworksDataRow (ErrorHandlingRow ()))
 
 ## Calling TypeScript React components from PureScript
 
-Suppose we have this TypeScript React component.
+Suppose we have this TypeScript React component, and we want to wrap it
+so that we can call it from PureScript.
 
 __src/Tags.tsx__
 ```typescript
@@ -264,6 +265,8 @@ div_ [ element tsxTags {tags:["one"]} ]
 ```
 
 ### React diffing algorithm and `foreign import`
+
+More helpful advice from [Robert Porter](https://github.com/robertdp):
 
 The [React diffing algorithm uses referential equality for the props](https://dev.to/tylerthehaas/referential-equality-in-react-127h).
 
