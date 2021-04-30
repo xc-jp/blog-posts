@@ -1,7 +1,5 @@
 # How to write PureScript React to replace TypeScript React in 2021
 
-Notes on PureScript development. Here's the original issue: https://github.com/xc-jp/manufacia/issues/599
-
 I refactored several thousand lines of TypeScript into PureScript, and here are my notes
 about the tricky bits. I say “refactor” instead of “rewrite,” because
 the word “rewrite” sometimes causes too much excitement.
@@ -103,7 +101,7 @@ For re-writing from TypeScript React to PureScript React Basic Hooks, the
 situation is very lucky, because we have very natural clean boundaries for
 replacement: the React components.
 
-We will ~rewrite~ refactor the TypeScript into PureScript one React component
+We will refactor the TypeScript into PureScript one React component
 at a time, and our ship will remain seaworthy at every step.
 
 The most mentally taxing programming will be at the interoperation boundary
@@ -111,7 +109,7 @@ between PureScript and TypeScript. There’s a lot of boilerplate code at
 that boundary, and since we're jumping between type systems, the compiler
 can’t help us with typechecking. For that reason, we’ll want to pry
 out sections larger than a single React component as we gain momentum on
-our re-write. Pick a top-level React component to replace
+our refactor. Pick a top-level React component to replace
 and then recursively replace of all of the components it depends on, in
 a single step. We can pretty much go file-by-file, and line-by-line.
 
