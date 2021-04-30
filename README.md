@@ -11,3 +11,11 @@ http://cross-magazine.sub.jp/magazine/
 Code: https://github.com/xc-jp/blog-post-code
 
 All content is copyright Cross Compass LLC 2021.
+
+## Building
+
+To locally `pandoc` all of the `*.md` files into `result/*.html` files,
+
+```
+nix-build
+```
