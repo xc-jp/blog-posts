@@ -183,8 +183,6 @@ same, so it’s easy to
 refactor TypeScript with __styled-components__ into PureScript with
 __emotion__.
 
-How to use Emotion, example:
-
 ## PureScript-TypeScript interop
 
 Notes on how to write the interface between PureScript and TypeScript.
@@ -197,34 +195,41 @@ TypeScript, and vice versa.
 
 We also must understand how FFI works in PureScript.
 
-https://github.com/purescript/documentation/blob/master/language/FFI.md
+[github.com/purescript/documentation/blob/master/language/FFI.md](https://github.com/purescript/documentation/blob/master/language/FFI.md)
 
-https://github.com/purescript/documentation/blob/master/guides/FFI.md
+[github.com/purescript/documentation/blob/master/guides/FFI.md](https://github.com/purescript/documentation/blob/master/guides/FFI.md)
 
 ### Thomas Honeyman’s article
 
-https://thomashoneyman.com/articles/replace-react-components-with-purescript/
+[How to Write PureScript React Components to Replace JavaScript](https://thomashoneyman.com/articles/replace-react-components-with-purescript/)
 and discussion:
-https://discourse.purescript.org/t/updated-how-to-replace-react-components-using-purescripts-react-libraries/
+[discourse.purescript.org/t/updated-how-to-replace-react-components-using-purescripts-react-libraries/](https://discourse.purescript.org/t/updated-how-to-replace-react-components-using-purescripts-react-libraries/)
 
 ### TypeScript [Union Types](https://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#union-types)
 
 There is no equivalent PureScript built-in feature which compiles to the same runtime representation.
 But these libraries can help.
 
-https://github.com/natefaubion/purescript-variant
+[github.com/natefaubion/purescript-variant](https://github.com/natefaubion/purescript-variant)
 
-https://github.com/jvliwanag/purescript-untagged-union
+[github.com/jvliwanag/purescript-untagged-union](https://github.com/jvliwanag/purescript-untagged-union)
 
-https://github.com/paluh/purescript-undefined-is-not-a-problem
+[github.com/paluh/purescript-undefined-is-not-a-problem](https://github.com/paluh/purescript-undefined-is-not-a-problem)
 
-https://github.com/doolse/purescript-tscompat
+[github.com/doolse/purescript-tscompat](https://github.com/doolse/purescript-tscompat)
 
 OhYes
-https://github.com/justinwoo/purescript-ohyes
-https://qiita.com/kimagure/items/4847685d02d4b15a556c
+
+[github.com/justinwoo/purescript-ohyes](https://github.com/justinwoo/purescript-ohyes)
+
+[OhYes, you can interop with TypeScript using PureScript](https://qiita.com/kimagure/items/4847685d02d4b15a556c)
 
 ### TypeScript [String Literal](https://www.typescriptlang.org/docs/handbook/literal-types.html#string-literal-types) Union Types
+
+```typescript
+type Alignment = "left" | "right" | "center"
+
+```
 
 This is common idiom in TypeScript. The runtime representation of these things
 is just a string. How do we make
@@ -233,11 +238,8 @@ a puzzle.
 
 Maybe with [`Symbol`](https://pursuit.purescript.org/packages/purescript-prelude/4.1.1/docs/Data.Symbol#t:SProxy), the PureScript type-level string.
 
-Or https://github.com/natefaubion/purescript-variant
+Or [github.com/natefaubion/purescript-variant](https://github.com/natefaubion/purescript-variant).
 
-```typescript
-type ProjectMediaType = 'time_series' | 'vibration' | 'image'
-```
 
 ### TypeScript [Intersection Types](https://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#intersection-types)
 
@@ -323,45 +325,7 @@ import Tags (tsxTags)
 div_ [ element tsxTags {tags:["one"]} ]
 ```
 
-### `foreign import` with typeclass constraint
-
-If a PureScript function has a class constraint, the compiled representation
-of the function gets one curried argument for the class dictionary.
-
-https://github.com/purescript/documentation/blob/master/guides/FFI.md#handling-constrained-types
-
-PureScript version 0.14 will forbid `foreign import` class constraints.
-
-https://github.com/purescript/purescript/issues/3182
-
-https://github.com/purescript/purescript/pull/3829
-
-https://github.com/purescript/purescript/issues/2768
-
-If we want to do a `foreign import` of a constrained function, then we can
-create a wrapper function with no constraints for the `foreign import` function.
-
-__Tags_.purs__
-```purescript
-tsxTags
-  :: forall attrs attrs_
-   . Union attrs attrs_ Props_tags
-  => ReactComponent (Record attrs)
-tsxTags = tsxTagsImpl
-
-foreign import tsxTagsImpl :: forall a. ReactComponent a
-```
-
-__Tags_.js__
-```javascript
-"use strict";
-
-exports.tsxTagsImpl = require('src/Tags').default;
-```
-
 ### React diffing algorithm and `foreign import`
-
-Tip from @robertdp.
 
 The [React diffing algorithm uses referential equality for the props](https://dev.to/tylerthehaas/referential-equality-in-react-127h).
 
@@ -382,7 +346,7 @@ A `foreign import` `ReactComponent` will return the same (referentially equal) v
 
 ## Calling PureScript React components from TypeScript
 
-We're going to be using the top-level `unsafePerformEffect` technique for creating exportable PureScript
+I like to use the top-level `unsafePerformEffect` technique for creating exportable PureScript
 React components, even though Madeline [“wouldn't say it’s the right thing to do.”](https://github.com/spicydonuts/purescript-react-basic-hooks/issues/41)
 
 ### Ambient Definition file
@@ -394,14 +358,6 @@ a `types/purs/MyModule.d.ts` which declares a TypeScript module.
 
 There are [two types of React components](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/bab0a49d79fb3cd850db3174d0ed91a85be7f433/types/react/index.d.ts#L82): `ComponentClass`, which is the “traditional” “classic” class-based
 component, and `FunctionComponent`, which is the Hooks-based component type.
-
-~We'll use the type [`FunctionComponent`](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/a17292911589e315b72ca8034cb9c8ac5eff4030/types/react/v16/index.d.ts#L546)
-, because we're using
-`React.Basic.Hooks`, which defines function components, not class components.~
-
-~We’ll use the type [`ComponentClass`](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/a17292911589e315b72ca8034cb9c8ac5eff4030/types/react/v16/index.d.ts#L585), because that corresponds to the
-`ReactComponent` type returned by
-[`React.Basic.Hooks.reactComponent`](https://pursuit.purescript.org/packages/purescript-react-basic-hooks/6.2.0/docs/React.Basic.Hooks#v:reactComponent).~
 
 
 We’ll use the type [`FunctionComponent`](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/a17292911589e315b72ca8034cb9c8ac5eff4030/types/react/v16/index.d.ts#L546), because that corresponds to [the
@@ -440,16 +396,10 @@ FFI components into native React Basic Hooks `psx* :: Component`.
 
 ### react-router and `history.push()`
 
-This is a pretty good but incomplete __react-router__
-binding: https://github.com/KSF-Media/purescript-react-basic-router
-It’s incomplete because it doesn’t have a `History` type.
+We published
+[__purescript-react-basic-router__](https://github.com/xc-jp/purescript-react-basic-router)
+so that we can `push` to a __react-router-dom__ `History` object.
 
-At the time this writing, the PureScript ecosystem is missing a binding
-to the [__history__](https://github.com/ReactTraining/history) library.
-This is awkward because
-[__react-router__ depends it for normal redirection](https://reactrouter.com/web/api/history).
-
-(introduce `push :: History -> String -> Effect Unit`)
 ### How to `getElementById`
 
 A bit tricky, so here is [the trick](https://lobste.rs/s/wa99yt/coming_purescript_from_haskell_reflex#c_faof1j):
@@ -502,6 +452,11 @@ React.do
     else empty
 ```
 
+I've been advised by my colleague that this is not a good technique, because
+the whole component might get unmounted while the `delay` is waiting,
+and then `setIcon`  will be called on the unmounted component. So maybe
+`useAff` instead of `launchAff_` would be better here.
+
 ### Foreign
 
 Question: How do we read properties of a plain JSON object which has been passed to us
@@ -509,16 +464,19 @@ when we are uncertain of the structure of the JSON object?
 
 Answer: The [`F` monad](https://pursuit.purescript.org/packages/purescript-foreign/6.0.0/docs/Foreign#t:F). [Parse, don’t validate.](http://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/)
 
+If we have a PureScript data type which we want to translate the JSON object into, then
+we can use
+[`Simple.JSON.read'`](https://pursuit.purescript.org/packages/purescript-simple-json/8.0.0/docs/Simple.JSON#v:read').
+to automatically parse the JSON object into our PureScript type.
 
 ## Library substitutions
 
 | | TypeScript | PureScript |
 |-|------------|------------|
-| `XMLHTTPRequest` | [axios](https://www.npmjs.com/package/axios) | [affjax](https://pursuit.purescript.org/packages/purescript-affjax) |
-| CSS class generation | [styled-components](https://styled-components.com/) | [react-basic-emotion](https://pursuit.purescript.org/packages/purescript-react-basic-emotion) |
-| React router | | [react-basic-router](https://github.com/KSF-Media/purescript-react-basic-router) |
-| String interpolation | | [interpolate](https://pursuit.purescript.org/packages/purescript-interpolate/) |
-| Loader for WebPack | | https://github.com/ethul/purs-loader https://github.com/andys8/craco-purescript-loader |
-
-| Rollup Plugin | | https://github.com/Pauan/rollup-plugin-purs |
+| `XMLHTTPRequest` | [__axios__](https://www.npmjs.com/package/axios) | [__affjax__](https://pursuit.purescript.org/packages/purescript-affjax) |
+| CSS class generation | [__styled-components__](https://styled-components.com/) | [__react-basic-emotion__](https://pursuit.purescript.org/packages/purescript-react-basic-emotion) |
+| React router | | [__react-basic-router__](https://github.com/xc-jp/purescript-react-basic-router) |
+| String interpolation | | [__interpolate__](https://pursuit.purescript.org/packages/purescript-interpolate/) |
+| Loader for WebPack | | [__craco-purscript-loader__](https://github.com/ethul/purs-loader https://github.com/andys8/craco-purescript-loader) |
+| Rollup Plugin | | [__rollup-plugin-purs__](https://github.com/Pauan/rollup-plugin-purs) |
 
