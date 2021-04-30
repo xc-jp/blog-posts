@@ -266,7 +266,11 @@ div_ [ element tsxTags {tags:["one"]} ]
 
 ### React diffing algorithm and `foreign import`
 
-More helpful advice from [Robert Porter](https://github.com/robertdp):
+Here is more helpful advice from [Robert Porter](https://github.com/robertdp),
+about typeclass 
+constraints on foreign imports of React components. Recent versions of PureScript
+have [deprecated typeclass constraints on foreign import](https://github.com/purescript/purescript/pull/3829),
+so you probably don't have to worry about this, but here it is just in case.
 
 The [React diffing algorithm uses referential equality for the props](https://dev.to/tylerthehaas/referential-equality-in-react-127h).
 
