@@ -1,7 +1,7 @@
 # How to write PureScript React to replace TypeScript React in 2021
 
-I refactored several thousand lines of TypeScript into PureScript, and here are my notes
-about the tricky bits. I say “refactor” instead of “rewrite,” because
+I refactored several thousand lines of TypeScript into PureScript.
+I say “refactor” instead of “rewrite,” because
 the word “rewrite” sometimes causes too much excitement.
 Anyway, “refactor” is accurate. A TypeScript program contains
 much more than TypeScript, it also consists of a whole build system
@@ -9,6 +9,10 @@ with bundlers, a deployment system, a backend, assets, et cetera. We get to keep
 all of that other stuff. We’re just going to “refactor” one of the passes
 of the JavaScript transpiler process, and I recommend that’s how you should
 frame it when you’re describing this process to the impatient.
+
+Here are my notes about the bits of the refactor which I found to be tricky.
+Additions or corrections to this document will be gratefully accepted, please
+create an Issue or a PR.
 
 ### On TypeScript
 
