@@ -33,8 +33,8 @@ Also, the TypeScript type system is underpowered and has too many escape
 hatches. It’s been my
 observation that when TypeScript programmers are passing a string to a function
 they will dutifully annotate it as type `:string`, but when the types get
-tricky they just give up and pass `:any`. But it’s in exactly those tricky
-situations that we need the compiler’s help.
+difficult they give up and pass `:any`. It’s in exactly those difficult
+situations that we need the compiler’s help checking the type.
 
 ### On PureScript
 
