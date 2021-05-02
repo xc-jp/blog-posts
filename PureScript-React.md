@@ -45,11 +45,10 @@ situations that we need the compiler’s help checking the type.
 What is [PureScript](https://www.purescript.org/)?
 It is a dialect of [Haskell](https://www.haskell.org/).
 
-There are some slight differences.
-A lot of people, myself included, think that PureScript records are
-an improvement over Haskell records. But they are the same language.
-`purs` is now the second-most-popular Haskell compiler implementation,
-after `ghc`.
+PureScript and Haskell are not exactly the same language, and the PureScript
+maintainers insist that [compatibility with Haskell code is a non-goal](https://discourse.purescript.org/t/how-to-write-purescript-react-to-replace-typescript-react-in-2021/2300/2). But let me put it this way: if you learn
+PureScript, then you will find that you have also learned Haskell. And
+likewise: if you already know Haskell then you already know PureScript.
 
 PureScript, being relatively lean and powerful, won’t need any
 external domain-specific languages. We’ll just express our program in
@@ -488,5 +487,5 @@ __emotion__.
 | React router | | [__react-basic-router__](https://github.com/xc-jp/purescript-react-basic-router) |
 | String interpolation | | [__interpolate__](https://pursuit.purescript.org/packages/purescript-interpolate/) |
 | Loader for WebPack | | [__purs-loader__](https://github.com/ethul/purs-loader) [__craco-purscript-loader__](https://github.com/andys8/craco-purescript-loader) |
-| Rollup Plugin | | [__rollup-plugin-purs__](https://github.com/Pauan/rollup-plugin-purs) |
+
 
