@@ -161,11 +161,9 @@ But these libraries can help.
 
 [github.com/doolse/purescript-tscompat](https://github.com/doolse/purescript-tscompat)
 
-OhYes
+[github.com/justinwoo/purescript-ohyes](https://github.com/justinwoo/purescript-ohyes) — [OhYes, you can interop with TypeScript using PureScript](https://qiita.com/kimagure/items/4847685d02d4b15a556c)
 
-[github.com/justinwoo/purescript-ohyes](https://github.com/justinwoo/purescript-ohyes)
 
-[OhYes, you can interop with TypeScript using PureScript](https://qiita.com/kimagure/items/4847685d02d4b15a556c)
 
 ### TypeScript [String Literal](https://www.typescriptlang.org/docs/handbook/literal-types.html#string-literal-types) Union Types
 
