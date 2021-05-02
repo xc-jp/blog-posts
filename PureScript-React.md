@@ -91,7 +91,7 @@ Hooks, a *Rules of Hooks* violation is a compile-time type error.
 
 __Me:__ *jaw slackens on my Shack Stack* That makes so much sense.
 
-### Our strategy for re-writing the whole program
+### Our strategy for rewriting the whole program
 
 When rewriting a computer program in another language, one often must
 simply rewrite the whole program and it won't be done until it’s done.
@@ -102,7 +102,7 @@ program and replace them with parts written in the new language. The key is
 to find good “parts,” to find boundaries out of which a section of the program
 can be cleanly pried and replaced, [ship-of-Theseus](https://en.wikipedia.org/wiki/Ship_of_Theseus)-style.
 
-For re-writing from TypeScript React to PureScript React Basic Hooks, the
+For rewriting from TypeScript React to PureScript React Basic Hooks, the
 situation is very lucky, because we have very natural clean boundaries for
 replacement: the React components.
 
