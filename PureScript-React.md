@@ -67,7 +67,8 @@ The most noticeable thing about __purescript-react-basic-hooks__ is the
 
 To understand why `Hook` is an
 [indexed monad](https://qiita.com/kimagure/items/a0ee7313e8c7690bf3f5),
-please read this short dramatization
+please read this
+[short and inaccurate dramatization](https://discourse.purescript.org/t/how-to-write-purescript-react-to-replace-typescript-react-in-2021/2300/11)
 of a conversation which I had at Shake Shack at the International Forum in Tokyo.
 
 __Me:__
