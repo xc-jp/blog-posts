@@ -57,12 +57,13 @@ plain PureScript.
 ### On PureScript React Basic Hooks
 
 If you want to write web applications in 2021, then
-PureScript React Basic Hooks is a very good framework choice.
+[__purescript-react-basic-hooks__](https://pursuit.purescript.org/packages/purescript-react-basic-hooks)
+is a very good framework choice.
 
 There are many other PureScript immediate-mode GUI libraries. Most of them
 were designed by Phil Freeman. React Basic Hooks is the best one.
 
-The most noticeable thing about __purescript-react-basic-hooks__ is the
+The most remarkable thing about __purescript-react-basic-hooks__ is the
 [`Hook`](https://pursuit.purescript.org/packages/purescript-react-basic-hooks/docs/React.Basic.Hooks#t:Hook) indexed monad.
 
 To understand why `Hook` is an
