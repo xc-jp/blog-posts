@@ -202,8 +202,8 @@ with the same runtime representation.
 
 ```purescript
 type ErrorHandlingRow r =
-  ( success: Boolean
-  , error: Nullable { message :: String }
+  ( success :: Boolean
+  , error :: Nullable { message :: String }
   | r
 )
 
