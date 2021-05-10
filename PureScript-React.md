@@ -407,14 +407,32 @@ and then `setIcon`  will be called on the unmounted component. So maybe
 
 ### Foreign
 
-Question: How do we read properties of a plain JSON object which has been passed to us
-when we are uncertain of the structure of the JSON object?
+How do we read a plain JSON object which has been passed to us?
 
-Answer: The [`F` monad](https://pursuit.purescript.org/packages/purescript-foreign/6.0.0/docs/Foreign#t:F). [Parse, don’t validate.](http://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/)
+With the [`F` parsing monad](https://pursuit.purescript.org/packages/purescript-foreign/docs/Foreign#t:F). 
+
+If `blob :: Foreign` is a JSON object which we expect to be an array of records, each with a string field named `"thing"`, then we can parse it into PureScript with the `F` monad like this:
+
+```purescript
+import Foreign (Foreign, readArray, readString)
+import Foreign.Index (readProp)
+import Control.Monad.Except (runExcept)
+
+result :: Either MultipleErrors (Array {type :: String})
+result = runExcept do
+  xs <- readArray blob
+  for xs \x -> do
+    t <- readString =<< readProp "thing" x
+    pure {type:t}
+```
+
+Then the `result` will be either the array of records, or a list of errors explaining exactly how the JSON structure was not what we expected it to be.
+
+The basic philosophy here is [Parse, don’t validate.](http://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/)
 
 If we have a PureScript data type which we want to translate the JSON object into, then
 we can use
-[`Simple.JSON.read'`](https://pursuit.purescript.org/packages/purescript-simple-json/8.0.0/docs/Simple.JSON#v:read').
+[`Simple.JSON.read'`](https://pursuit.purescript.org/packages/purescript-simple-json/docs/Simple.JSON#v:read')
 to automatically parse the JSON object into our PureScript type.
 
 ## vscode
