@@ -8,7 +8,7 @@ much more than TypeScript, it also consists of a whole build system
 with bundlers, a deployment system, a backend, assets, et cetera. We get to keep
 all of that other stuff. We’re just going to “refactor” one of the passes
 of the JavaScript transpiler process, and I recommend that’s how you should
-frame it when you’re describing this process to the impatient.
+frame it when you’re describing this process to neophobes.
 
 Here are my notes about the bits of the refactor which I found to be tricky.
 Additions or corrections to this document will be gratefully accepted, please
