@@ -81,10 +81,9 @@ __[Robert Porter](https://github.com/robertdp):__
 Calling a `Hook` in a loop is forbidden by the
 [*Rules of Hooks*](https://reactjs.org/docs/hooks-rules.html#only-call-hooks-at-the-top-level).
 That is why `Hook` is an indexed monad; because 
-Madeline Trotter and Phil
-Freeman noticed that
+Madeline Trotter noticed that
 the algebraic structure of the indexed monad matches neatly with
-the *Rules of Hooks*, so they created the `Hook` indexed monad.
+the *Rules of Hooks*, so she created the `Hook` indexed monad.
 In TypeScript the only way to stop users from violating
 the *Rules of Hooks* is by linting or scolding. In PureScript React Basic
 Hooks, a *Rules of Hooks* violation is a compile-time type error.
