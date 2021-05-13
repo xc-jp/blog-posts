@@ -61,7 +61,8 @@ If you want to write web applications in 2021, then
 is a very good framework choice.
 
 There are many other PureScript immediate-mode GUI libraries. Most of them
-were designed by Phil Freeman. React Basic Hooks is the best one.
+were written by Phil Freeman. __purescript-react-basic-hooks__ was written by
+Madeline Trotter, and it's the best PureScript immediate-mode GUI library. 
 
 The most remarkable thing about __purescript-react-basic-hooks__ is the
 [`Hook`](https://pursuit.purescript.org/packages/purescript-react-basic-hooks/docs/React.Basic.Hooks#t:Hook) indexed monad.
