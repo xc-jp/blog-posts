@@ -80,3 +80,11 @@ https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.41.9361&rep=rep1&type=
 Notions of computation and monads
 https://person.dibris.unige.it/moggi-eugenio/ftp/ic91.pdf
 
+Peter Landin
+https://en.wikipedia.org/wiki/Peter_Landin
+
+John Backus
+https://en.wikipedia.org/wiki/John_Backus
+
+Philip Wadler
+https://en.wikipedia.org/wiki/Philip_Wadler
