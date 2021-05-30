@@ -3,16 +3,17 @@
 I refactored several thousand lines of TypeScript into PureScript.
 I say “refactor” instead of “rewrite,” because
 the word “rewrite” sometimes causes too much excitement.
-Anyway, “refactor” is accurate. A TypeScript program contains
+Anyway, the word “refactor” is accurate. A TypeScript program contains
 much more than TypeScript, it also consists of a whole build system
 with bundlers, a deployment system, a backend, assets, et cetera. We get to keep
 all of that other stuff. We’re just going to “refactor” one of the passes
-of the JavaScript transpiler process, and I recommend that’s how you should
+of the JavaScript transpiler process, and I recommend that that is how you should
 frame it when you’re describing this process to neophobes.
 
-Here are my notes about the bits of the refactor which I found to be tricky.
+Here are my notes about the parts of the refactor which I found to be tricky.
 Additions or corrections to this document will be gratefully accepted, please
-[create an Issue or a PR](https://github.com/xc-jp/blog-posts/blob/master/PureScript-React.md).
+[create an Issue or a PR on Github.](https://github.com/xc-jp/blog-posts/blob/master/PureScript-React.md).
+Discuss on the [PureScript Discourse](https://discourse.purescript.org/t/how-to-write-purescript-react-to-replace-typescript-react-in-2021).
 
 ### On TypeScript
 
@@ -90,10 +91,10 @@ Hooks, a *Rules of Hooks* violation is a compile-time type error.
 
 __Me:__ *jaw slackens on my Shack Stack* That makes so much sense.
 
-### Our strategy for rewriting the whole program
+### Our strategy for refactoring the whole program
 
-When rewriting a computer program in another language, one often must
-simply rewrite the whole program and it won't be done until it’s done.
+When refactoring (“rewriting”) a computer program into another language, one often must
+simply refactor the whole program and it won't be done until it’s done.
 
 In some lucky cases, there exists good FFI bindings between the source
 and target languages. Then it’s possible to swap out parts of the old
@@ -101,7 +102,7 @@ program and replace them with parts written in the new language. The key is
 to find good “parts,” to find boundaries out of which a section of the program
 can be cleanly pried and replaced, [ship-of-Theseus](https://en.wikipedia.org/wiki/Ship_of_Theseus)-style.
 
-For rewriting from TypeScript React to PureScript React Basic Hooks, the
+For refactoring from TypeScript React to PureScript React Basic Hooks, the
 situation is very lucky, because we have very natural clean boundaries for
 replacement: the React components.
 
