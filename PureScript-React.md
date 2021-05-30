@@ -12,7 +12,7 @@ frame it when you’re describing this process to neophobes.
 
 Here are my notes about the bits of the refactor which I found to be tricky.
 Additions or corrections to this document will be gratefully accepted, please
-create an Issue or a PR.
+[create an Issue or a PR](https://github.com/xc-jp/blog-posts/blob/master/PureScript-React.md).
 
 ### On TypeScript
 
@@ -30,8 +30,8 @@ That's why a typical TypeScript React program will usually contain the following
 external domain-specific languages:
 
 * *TSX*
-* *regular expressions*
 * *styled-components* or *emotion* templates
+* *regular expressions*
 
 Also, the TypeScript type system is underpowered and has too many escape 
 hatches. It’s been my
@@ -295,7 +295,7 @@ A `foreign import` `ReactComponent` will return the same (referentially equal) v
 ## Calling PureScript React components from TypeScript
 
 I like to use the top-level `unsafePerformEffect` technique for creating exportable PureScript
-React components, even though Madeline [“wouldn't say it’s the right thing to do.”](https://github.com/spicydonuts/purescript-react-basic-hooks/issues/41)
+React components, even though Madeline Trotter [“wouldn't say it’s the right thing to do.”](https://github.com/spicydonuts/purescript-react-basic-hooks/issues/41)
 
 ### Ambient Definition file
 
@@ -502,8 +502,9 @@ __emotion__.
 |-|------------|------------|
 | `XMLHTTPRequest` | [__axios__](https://www.npmjs.com/package/axios) | [__affjax__](https://pursuit.purescript.org/packages/purescript-affjax) |
 | CSS class generation | [__styled-components__](https://styled-components.com/) | [__react-basic-emotion__](https://pursuit.purescript.org/packages/purescript-react-basic-emotion) |
-| React router | | [__react-basic-router__](https://github.com/xc-jp/purescript-react-basic-router) |
+| React Router Web | [@types/react-router-dom](https://www.npmjs.com/package/@types/react-router-dom) | [__react-basic-router__](https://github.com/xc-jp/purescript-react-basic-router) |
 | String interpolation | | [__interpolate__](https://pursuit.purescript.org/packages/purescript-interpolate/) |
+| Regex | | [__parsing-replace__](https://pursuit.purescript.org/packages/purescript-parsing-replace) |
 | Loader for WebPack | | [__purs-loader__](https://github.com/ethul/purs-loader) [__craco-purscript-loader__](https://github.com/andys8/craco-purescript-loader) |
 
 
