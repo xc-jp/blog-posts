@@ -31,7 +31,6 @@ external domain-specific languages:
 
 * *TSX*
 * *styled-components* or *emotion* templates
-* *regular expressions*
 
 Also, the TypeScript type system is underpowered and has too many escape 
 hatches. It’s been my
@@ -504,7 +503,6 @@ __emotion__.
 | CSS class generation | [__styled-components__](https://styled-components.com/) | [__react-basic-emotion__](https://pursuit.purescript.org/packages/purescript-react-basic-emotion) |
 | React Router Web | [@types/react-router-dom](https://www.npmjs.com/package/@types/react-router-dom) | [__react-basic-router__](https://github.com/xc-jp/purescript-react-basic-router) |
 | String interpolation | | [__interpolate__](https://pursuit.purescript.org/packages/purescript-interpolate/) |
-| Regex | | [__parsing-replace__](https://pursuit.purescript.org/packages/purescript-parsing-replace) |
 | Loader for WebPack | | [__purs-loader__](https://github.com/ethul/purs-loader) [__craco-purscript-loader__](https://github.com/andys8/craco-purescript-loader) |
 
 
