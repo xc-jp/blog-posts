@@ -520,7 +520,7 @@ exports.spinner = require('assets/spinner.png').default;
 
 When we want to write inline CSS instead of a stylesheet but we also want to use
 [CSS selector combinators](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors#combinators),
-then we will want to use the older
+then we will want a CSS class generation library. Either the older
 [__styled-components__](https://styled-components.com/)
 or the newer, better
 [__emotion__](https://emotion.sh/).
@@ -537,7 +537,7 @@ __emotion__.
 | | TypeScript | PureScript |
 |-|------------|------------|
 | `XMLHTTPRequest` | [__axios__](https://www.npmjs.com/package/axios) | [__affjax__](https://pursuit.purescript.org/packages/purescript-affjax) |
-| CSS class generation | [__styled-components__](https://styled-components.com/) | [__react-basic-emotion__](https://pursuit.purescript.org/packages/purescript-react-basic-emotion) |
+| CSS class generation | [__styled-components__](https://styled-components.com/) [__@emotion/styled__](https://emotion.sh/docs/styled) | [__react-basic-emotion__](https://pursuit.purescript.org/packages/purescript-react-basic-emotion) |
 | React Router Web | [__@types/react-router-dom__](https://www.npmjs.com/package/@types/react-router-dom) | [__react-basic-router__](https://github.com/xc-jp/purescript-react-basic-router) |
 | String interpolation | | [__interpolate__](https://pursuit.purescript.org/packages/purescript-interpolate/) |
 | Loader for WebPack | | [__purs-loader__](https://github.com/ethul/purs-loader) [__craco-purscript-loader__](https://github.com/andys8/craco-purescript-loader) |
