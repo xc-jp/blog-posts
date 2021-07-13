@@ -407,9 +407,45 @@ and then `setIcon`  will be called on the unmounted component. So maybe
 
 ### Foreign
 
-How do we read a plain JSON object which has been passed to us?
+__Question:__ In my PureScript program, I've recieved a foreign JSON object, which I expect to have a particular structure. How do I safely “cast” that to a PureScript data type?
 
-With the [`F` parsing monad](https://pursuit.purescript.org/packages/purescript-foreign/docs/Foreign#t:F). 
+Or maybe I don't have any expectations about the structure of the JSON, and I want to read the JSON and discover its structure?
+
+This is a super common question, and I was using PureScript for years before I figured out what best answers were.
+
+The classic essay on the general problem of how to read unstructured untyped data into a typed data structure is [Parse, don't validate](https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/) and I strongly recommend this essay.
+
+# 1. Argonaut
+
+The [`decodeJson`](https://pursuit.purescript.org/packages/purescript-argonaut/docs/Data.Argonaut#t:DecodeJson) function from __argonaut__ can infer the structure of the JSON you're expecting from the type of the data that you want to cast it to. If the structure of the JSON doesn't match the type, then it returns an error in `Left`.
+
+```purescript
+show $ do
+    x :: Array {a::Int,b::String} <- decodeJson =<< parseJson """[{"a":2,"b":"stuff"}]"""
+    pure x
+```
+Results in `(Right [{ a: 2, b: "stuff" }])`
+
+See the __argonaut-codecs__ __Quick start__ for more `decodeJson` examples:
+
+https://pursuit.purescript.org/packages/purescript-argonaut-codecs
+
+If you want to `decodeJson` for some type that doesn't already have a `DecodeJson` instance, then you can write a `DecodeJson` instance for your type.
+
+If you want to discover the structure of the JSON, you can write monadic parsers in the `Either` monad with the [`getField*`](https://pursuit.purescript.org/packages/purescript-argonaut-codecs/docs/Data.Argonaut.Decode.Combinators#v:getField) functions. You can also [`preview`](https://pursuit.purescript.org/packages/purescript-profunctor-lenses/docs/Data.Lens#v:preview) the `Json` with [`Argonaut.Prisms`](https://pursuit.purescript.org/packages/purescript-argonaut-traversals/docs/Data.Argonaut.Prisms).
+
+
+# 2. Simple.JSON
+
+The [`Simple.JSON.read'`](https://pursuit.purescript.org/packages/purescript-simple-json/docs/Simple.JSON#v:read') function can infer the expected structure of JSON from the PureScipt data type that we are trying to read into.
+
+https://purescript-simple-json.readthedocs.io/en/latest/intro.html
+
+`Simple.JSON` is based on the `F` monad instead of the `DecodeJson` typeclass.
+
+# 3. F Monad
+
+The most powerful and general way to read foreign data is by writing monadic parsers for the [`F` monad](https://pursuit.purescript.org/packages/purescript-foreign/docs/Foreign#t:F).  You run the parser with [`runExcept`](https://pursuit.purescript.org/packages/purescript-transformers/docs/Control.Monad.Except#v:runExcept). 
 
 If `blob :: Foreign` is a JSON object which we expect to be an array of records, each with a string field named `"thing"`, then we can parse it into PureScript with the `F` monad like this:
 
@@ -428,12 +464,6 @@ result = runExcept do
 
 Then the `result` will be either the array of records, or a list of errors explaining exactly how the JSON structure was not what we expected it to be.
 
-The basic philosophy here is [Parse, don’t validate.](http://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/)
-
-If we have a PureScript data type which we want to translate the JSON object into, then
-we can use
-[`Simple.JSON.read'`](https://pursuit.purescript.org/packages/purescript-simple-json/docs/Simple.JSON#v:read')
-to automatically parse the JSON object into our PureScript type.
 
 ## vscode
 
