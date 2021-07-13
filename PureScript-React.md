@@ -464,6 +464,12 @@ result = runExcept do
 
 Then the `result` will be either the array of records, or a list of errors explaining exactly how the JSON structure was not what we expected it to be.
 
+#### 4. codec-argonaut
+
+> “The [codec-argonaut ](https://github.com/garyb/purescript-codec-argonaut) library is used by those of us who like a [less typeclass-reliant ](http://code.slipthrough.net/2018/03/13/thoughts-on-typeclass-codecs/) version of handling things too.”
+>
+> [— Gary Burgess](https://discourse.purescript.org/t/how-to-read-cast-validate-json-in-purescript/2452/2)
+
 
 ## vscode
 
