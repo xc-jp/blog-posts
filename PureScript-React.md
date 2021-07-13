@@ -415,7 +415,7 @@ This is a super common question, and I was using PureScript for years before I f
 
 The classic essay on the general problem of how to read unstructured untyped data into a typed data structure is [Parse, don't validate](https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/) and I strongly recommend this essay.
 
-# 1. Argonaut
+#### 1. Argonaut
 
 The [`decodeJson`](https://pursuit.purescript.org/packages/purescript-argonaut/docs/Data.Argonaut#t:DecodeJson) function from __argonaut__ can infer the structure of the JSON you're expecting from the type of the data that you want to cast it to. If the structure of the JSON doesn't match the type, then it returns an error in `Left`.
 
@@ -435,7 +435,7 @@ If you want to `decodeJson` for some type that doesn't already have a `DecodeJso
 If you want to discover the structure of the JSON, you can write monadic parsers in the `Either` monad with the [`getField*`](https://pursuit.purescript.org/packages/purescript-argonaut-codecs/docs/Data.Argonaut.Decode.Combinators#v:getField) functions. You can also [`preview`](https://pursuit.purescript.org/packages/purescript-profunctor-lenses/docs/Data.Lens#v:preview) the `Json` with [`Argonaut.Prisms`](https://pursuit.purescript.org/packages/purescript-argonaut-traversals/docs/Data.Argonaut.Prisms).
 
 
-# 2. Simple.JSON
+#### 2. Simple.JSON
 
 The [`Simple.JSON.read'`](https://pursuit.purescript.org/packages/purescript-simple-json/docs/Simple.JSON#v:read') function can infer the expected structure of JSON from the PureScipt data type that we are trying to read into.
 
@@ -443,7 +443,7 @@ https://purescript-simple-json.readthedocs.io/en/latest/intro.html
 
 `Simple.JSON` is based on the `F` monad instead of the `DecodeJson` typeclass.
 
-# 3. F Monad
+#### 3. F Monad
 
 The most powerful and general way to read foreign data is by writing monadic parsers for the [`F` monad](https://pursuit.purescript.org/packages/purescript-foreign/docs/Foreign#t:F).  You run the parser with [`runExcept`](https://pursuit.purescript.org/packages/purescript-transformers/docs/Control.Monad.Except#v:runExcept). 
 
