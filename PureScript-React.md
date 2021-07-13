@@ -441,7 +441,7 @@ The [`Simple.JSON.read'`](https://pursuit.purescript.org/packages/purescript-sim
 
 https://purescript-simple-json.readthedocs.io/en/latest/intro.html
 
-`Simple.JSON` is based on the `F` monad instead of the `DecodeJson` typeclass.
+The automatic decoding in `Simple.JSON` is based on the[`ReadForeign`](https://pursuit.purescript.org/packages/purescript-simple-json/docs/Simple.JSON#t:ReadForeign) typeclass instead of the `DecodeJson` typeclass.
 
 #### 3. F Monad
 
