@@ -454,12 +454,12 @@ import Foreign (Foreign, readArray, readString)
 import Foreign.Index (readProp)
 import Control.Monad.Except (runExcept)
 
-result :: Either MultipleErrors (Array {type :: String})
+result :: Either MultipleErrors (Array {thing :: String})
 result = runExcept do
   xs <- readArray blob
   for xs \x -> do
     t <- readString =<< readProp "thing" x
-    pure {type:t}
+    pure {thing:t}
 ```
 
 Then the `result` will be either the array of records, or a list of errors explaining exactly how the JSON structure was not what we expected it to be.
