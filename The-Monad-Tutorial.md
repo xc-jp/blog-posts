@@ -3,7 +3,7 @@
 
 Here is my contribution to this genre. To be presented at the *Agora* at Cross Compass in Tokyo, 2021.
 
-# statements and expressions
+# Prologue. Statements and Expressions
 
 An __expression__ is part of a computer program which is evaluated to a value. `2 * 3 + 4`
 
@@ -59,8 +59,13 @@ of expressions which could be used to specify that one thing happens after anoth
 Philip Wadler added Monads to Haskell, and that is how he solved the ancient question of how to say that one thing happens
 after another by using only expressions.
 
+# Epilogue. Algebraic structure of Monads
 
-Associative but not commutative: matrix multiplication
+Computer programming magic happens with associative binary operators.
+
+Example: Associative but not commutative: matrix multiplication
+
+# References
 
 The Next 700 Programming Languages
 https://www.cs.cmu.edu/~crary/819-f09/Landin66.pdf
