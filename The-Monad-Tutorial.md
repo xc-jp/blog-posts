@@ -15,6 +15,14 @@ Assigning a variable.
 Statements can do side-effects, so we can say that one thing happens after another.
 Statements can change the state of the program, and are very difficult to reason about.
 
+```c
+x = 2;
+f();
+printf("%d", x);
+```
+
+What value of `x` is printed? We have *no idea*.
+
 Expressions can be reasoned about algebraically.
 
 If we could write computer programs using only expressions, then computer programming could be so easy. Can it be done? Many great computer
