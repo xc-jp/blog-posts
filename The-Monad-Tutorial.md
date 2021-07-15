@@ -65,6 +65,9 @@ Computer programming magic happens with associative binary operators.
 
 Example: Associative but not commutative: matrix multiplication
 
+Most programming languages have a complicated notion of equality (notoriously Javascript).
+In Haskell, equality is substitutional, just like in high school algebra.
+
 # References
 
 The Next 700 Programming Languages
