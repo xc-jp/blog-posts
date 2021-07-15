@@ -1,5 +1,5 @@
 
-# The Monad Tutorial
+# A Character-Driven Monad Tutorial with a Three-Act Structure
 
 Here is my contribution to this genre. To be presented at the *Agora* at Cross Compass in Tokyo, 2021.
 
@@ -20,7 +20,7 @@ Expressions can be reasoned about algebraically.
 If we could write computer programs using only expressions, then computer programming could be so easy. Can it be done? Many great computer
 scientists have tried to do exactly that.
 
-# Peter Landin
+# Act I. Peter Landin
 
 In 1965, the legendary computer scientist Peter Landin read in a journal that there were over 1,700 programming languages.
 He considered the design of those languages to be accidents of history. To correct the accidental course of programming language
@@ -32,7 +32,7 @@ one thing happens after another by using only expressions.
 
 After this frustration Peter Landin quit computer science and joined the Gay Liberation Front.
 
-# John Backus
+# Act II. John Backus
 
 In 1977, the legendary computer scientist John Backus apologized for his programming language, FORTRAN,
 in a paper titled Can Programming be Liberated from the Von Neumann style?
@@ -46,7 +46,7 @@ another by using only expressions.
 
 The source code for the FL language was owned by IBM. It was never published, and lost to history.
 
-# Philip Wadler
+# Act III. Philip Wadler
 
 In 1992, the legendary computer scientists Philip Wadler and Simon Peyton Jones began work on the Haskell programming
 language. They thought that the problem with computer programming languages
