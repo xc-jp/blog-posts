@@ -1,15 +1,5 @@
 # How to write PureScript React to replace TypeScript React in 2021
 
-This post is mostly for people who have already decided that they want to write React in PureScript. Explanations for why this is a good idea abound on the internet. I’ll just make one motivating observation before we proceed:
-
-__A.__ React is a framework for __declarative functional__ programming with __constrained side-effects__.
-
-__B.__ PureScript is a language for __declarative functional__ programming with __constrained side-effects__.
-
-__C.__ TypeScript is a language for __imperative object-oriented__ programming with __unlimited side-effects__.
-
-__A.__ and __B.__ combine together much better than __A.__ and __C.__.
-
 I refactored several thousand lines of TypeScript React into PureScript React.
 I say “refactor” instead of “rewrite,” because
 the word “rewrite” sometimes causes too much excitement.
@@ -65,6 +55,14 @@ external domain-specific languages. We’ll just express our program in
 plain PureScript.
 
 ### On PureScript React Basic Hooks
+
+__A.__ React is a framework for __declarative functional__ programming with __constrained side-effects__.
+
+__B.__ PureScript is a language for __declarative functional__ programming with __constrained side-effects__.
+
+__C.__ TypeScript is a language for __imperative object-oriented__ programming with __unlimited side-effects__.
+
+__A.__ and __B.__ combine together much better than __A.__ and __C.__.
 
 If you want to write web applications in 2021, then
 [__purescript-react-basic-hooks__](https://pursuit.purescript.org/packages/purescript-react-basic-hooks)
