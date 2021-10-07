@@ -62,7 +62,7 @@ __B.__ PureScript is a language for __declarative functional__ programming with 
 
 __C.__ TypeScript is a language for __imperative object-oriented__ programming with __unlimited side-effects__.
 
-__A.__ and __B.__ combine together much better than __A.__ and __C.__.
+React and PureScript combine together much better than React and TypeScript.
 
 If you want to write web applications in 2021, then
 [__purescript-react-basic-hooks__](https://pursuit.purescript.org/packages/purescript-react-basic-hooks)
