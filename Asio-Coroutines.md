@@ -23,7 +23,7 @@ of each `boost::asio::ip::tcp::socket`, and always use that same `streambuf` to 
 from the `socket`. Then we can read from the TCP stream in the imperative one-thing-after-another
 style, which looks like this:
 
-These are not *high-performance* functions, because they copy a lot of memory. 
+These are not *high-performance* functions, because they copy a lot of memory inefficiently. 
 Asio and C++20 coroutines can be used to write *high-performance* functions in the same style.
 
 So given a `socket` and a `streambuf` which have the same lifetime:
