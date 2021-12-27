@@ -37,13 +37,13 @@ This is the kind of imperative on-thing-after-another TCP-reading code that we w
 
 ```c++
 {
-  // Read a `string` from the `socket` until we encounter a `char` `';'`.
+  // First read a `string` from the `socket` until we encounter a `char` `';'`.
   std::string s1 = co_await async_read_string_until(socket, streambuf, ';');
 
-  // Read a ASCII-encoded `uint32_t` from the `socket` until we encounter a `char` `';'`.
+  // Next read a ASCII-encoded `uint32_t` from the `socket` until we encounter a `char` `';'`.
   uint32_t x1 = co_await async_read_uint_until(socket, streambuf, ';');
 
-  // Read a `std::vector<char>` of length *N* from the `socket`.
+  // Next read a `std::vector<char>` of length *N* from the `socket`.
   std::vector<char> = co_await async_read_vector_n(socket, streambuf, 10);
 }
 ```
@@ -133,6 +133,9 @@ async_read_vector_n(tcp::socket &socket, asio::streambuf &b, size_t n) {
 }
 ```
 
+If you like this imperative one-thing-after-another style of asynchronous TCP socket reading but C++20 
+is a bit too bleeding-edge for you to use at work, then I recommend the GHC Haskell compiler,
+in which all network I/O is always asynchronous.
 
 ## Some further coroutine reading
 
