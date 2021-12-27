@@ -26,6 +26,31 @@ style, which looks like this:
 These are not *high-performance* functions, because they copy a lot of memory. 
 Asio and C++20 coroutines can be used to write *high-performance* functions in the same style.
 
+So given a `socket` and a `streambuf` which have the same lifetime:
+
+```c++
+boost::asio::ip::tcp::socket socket;
+boost::asio::streambuf streambuf;
+```
+
+This is the kind of code that we want to write:
+
+```c++
+{
+  // Read a `string` from the `socket` until we encounter a `char` `';'`.
+  std::string s1 = co_await async_read_string_until(socket, streambuf, ';');
+
+  // Read a ASCII-encoded `uint32_t` from the `socket` until we encounter a `char` `';'`.
+  uint32_t x1 = co_await async_read_uint_until(socket, streambuf, ';');
+
+  // Read a `std::vector<char>` of length *N* from the `socket`.
+  std::vector<char> = co_await async_read_vector_n(socket, streambuf, 10);
+}
+```
+
+This is how we can write those three functions `async_read_string_until`, `async_read_uint_until`, and `async_read_vector_n`:
+
+
 ```c++
 /**
  * Asynchronously read a string until a delimiter character from a streambuf,
@@ -48,7 +73,7 @@ async_read_string_until(tcp::socket &socket, asio::streambuf &b, char delim) {
   std::string s(
       asio::buffers_begin(ibuf),
       asio::buffers_begin(ibuf) +
-          (bytes_transferred - 1)); // TODO Copying 1 char at a time :(
+          (bytes_transferred - 1));
   b.consume(bytes_transferred);
   co_return s;
 }
@@ -69,26 +94,9 @@ async_read_uint_until(tcp::socket &socket, asio::streambuf &b, char delim) {
 }
 
 /**
- * Asynchronously read an ASCII size_t string until a delimeter character from
- * streambuf, reading more from a tcp::socket if necessary. Consume the string.
- * Throw an exception if success is impossible.
- * TODO I suppose we could generalize this with async_read_uint_until.
- */
-asio::awaitable<size_t> async_read_size_until(tcp::socket &socket,
-                                              asio::streambuf &b, char delim) {
-  std::string s = co_await async_read_string_until(socket, b, delim);
-  try {
-    co_return boost::lexical_cast<size_t>(s);
-  } catch (std::exception &ex) {
-    throw std::runtime_error(string(__func__) + string(" / ") + ex.what());
-  }
-}
-
-/**
  * Asynchronously read a data vector of length n bytes from a streambuf,
  * reading more from a tcp::socket if necessary. Consume the vector.
  * Throw an exception if success is impossible.
- * TODO Unused?
  */
 asio::awaitable<std::vector<char>>
 async_read_vector_n(tcp::socket &socket, asio::streambuf &b, size_t n) {
