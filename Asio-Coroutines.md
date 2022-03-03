@@ -11,7 +11,7 @@ When I say
 reads from a TCP socket stream, while writing in an imperative style of one-thing-after-another.
 
 Reading from TCP this way has historically been hard, because when we read *N* bytes from TCP
-then we’re not guaranteed to get *N* bytes, and if we got let than we expected, then
+then we’re not guaranteed to get *N* bytes, and if we got less than we expected, then
 we have to loop back around and read from TCP again and wait for the result. If we understand
 how this works then it’s not too hard to write code which does this correctly, but it’s a lot of
 code and it doesn’t compose well and it’s hard to package it into a reusable library. 
