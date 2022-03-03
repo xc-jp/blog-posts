@@ -33,7 +33,7 @@ boost::asio::ip::tcp::socket socket;
 boost::asio::streambuf streambuf;
 ```
 
-This is the kind of imperative on-thing-after-another TCP-reading code that we want to write:
+This is the kind of imperative one-thing-after-another TCP-reading code that we want to write:
 
 ```c++
 {
