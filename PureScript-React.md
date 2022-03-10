@@ -1,18 +1,19 @@
 # How to write PureScript React to replace TypeScript React in 2021
 
-I refactored several thousand lines of TypeScript into PureScript.
+I refactored several thousand lines of TypeScript React into PureScript React.
 I say “refactor” instead of “rewrite,” because
 the word “rewrite” sometimes causes too much excitement.
-Anyway, “refactor” is accurate. A TypeScript program contains
+Anyway, the word “refactor” is accurate. A TypeScript program contains
 much more than TypeScript, it also consists of a whole build system
 with bundlers, a deployment system, a backend, assets, et cetera. We get to keep
 all of that other stuff. We’re just going to “refactor” one of the passes
-of the JavaScript transpiler process, and I recommend that’s how you should
+of the JavaScript transpiler process, and I recommend that that is how you should
 frame it when you’re describing this process to neophobes.
 
-Here are my notes about the bits of the refactor which I found to be tricky.
+Here are my notes about the parts of the refactor which I found to be tricky.
 Additions or corrections to this document will be gratefully accepted, please
-create an Issue or a PR.
+[create an Issue or a PR on Github.](https://github.com/xc-jp/blog-posts/blob/master/PureScript-React.md).
+Discuss on the [PureScript Discourse](https://discourse.purescript.org/t/how-to-write-purescript-react-to-replace-typescript-react-in-2021).
 
 ### On TypeScript
 
@@ -30,7 +31,6 @@ That's why a typical TypeScript React program will usually contain the following
 external domain-specific languages:
 
 * *TSX*
-* *regular expressions*
 * *styled-components* or *emotion* templates
 
 Also, the TypeScript type system is underpowered and has too many escape 
@@ -55,6 +55,14 @@ external domain-specific languages. We’ll just express our program in
 plain PureScript.
 
 ### On PureScript React Basic Hooks
+
+__A.__ React is a framework for __declarative functional__ programming with __constrained side-effects__.
+
+__B.__ PureScript is a language for __declarative functional__ programming with __constrained side-effects__.
+
+__C.__ TypeScript is a language for __imperative object-oriented__ programming with __unlimited side-effects__.
+
+React and PureScript combine together much better than React and TypeScript.
 
 If you want to write web applications in 2021, then
 [__purescript-react-basic-hooks__](https://pursuit.purescript.org/packages/purescript-react-basic-hooks)
@@ -91,10 +99,10 @@ Hooks, a *Rules of Hooks* violation is a compile-time type error.
 
 __Me:__ *jaw slackens on my Shack Stack* That makes so much sense.
 
-### Our strategy for rewriting the whole program
+### Our strategy for refactoring the whole program
 
-When rewriting a computer program in another language, one often must
-simply rewrite the whole program and it won't be done until it’s done.
+When refactoring (“rewriting”) a computer program into another language, one often must
+simply refactor the whole program and it won't be done until it’s done.
 
 In some lucky cases, there exists good FFI bindings between the source
 and target languages. Then it’s possible to swap out parts of the old
@@ -102,7 +110,7 @@ program and replace them with parts written in the new language. The key is
 to find good “parts,” to find boundaries out of which a section of the program
 can be cleanly pried and replaced, [ship-of-Theseus](https://en.wikipedia.org/wiki/Ship_of_Theseus)-style.
 
-For rewriting from TypeScript React to PureScript React Basic Hooks, the
+For refactoring from TypeScript React to PureScript React Basic Hooks, the
 situation is very lucky, because we have very natural clean boundaries for
 replacement: the React components.
 
@@ -295,7 +303,7 @@ A `foreign import` `ReactComponent` will return the same (referentially equal) v
 ## Calling PureScript React components from TypeScript
 
 I like to use the top-level `unsafePerformEffect` technique for creating exportable PureScript
-React components, even though Madeline [“wouldn't say it’s the right thing to do.”](https://github.com/spicydonuts/purescript-react-basic-hooks/issues/41)
+React components, even though Madeline Trotter [“wouldn't say it’s the right thing to do.”](https://github.com/spicydonuts/purescript-react-basic-hooks/issues/41)
 
 ### Ambient Definition file
 
@@ -407,9 +415,45 @@ and then `setIcon`  will be called on the unmounted component. So maybe
 
 ### Foreign
 
-How do we read a plain JSON object which has been passed to us?
+__Question:__ In my PureScript program, I've recieved a foreign JSON object, which I expect to have a particular structure. How do I safely “cast” that to a PureScript data type?
 
-With the [`F` parsing monad](https://pursuit.purescript.org/packages/purescript-foreign/docs/Foreign#t:F). 
+Or maybe I don't have any expectations about the structure of the JSON, and I want to read the JSON and discover its structure?
+
+This is a super common question, and I was using PureScript for years before I figured out what best answers were.
+
+The classic essay on the general problem of how to read unstructured untyped data into a typed data structure is [Parse, don't validate](https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/) and I strongly recommend this essay.
+
+#### 1. Argonaut
+
+The [`decodeJson`](https://pursuit.purescript.org/packages/purescript-argonaut/docs/Data.Argonaut#t:DecodeJson) function from __argonaut__ can infer the structure of the JSON you're expecting from the type of the data that you want to cast it to. If the structure of the JSON doesn't match the type, then it returns an error in `Left`.
+
+```purescript
+show $ do
+    x :: Array {a::Int,b::String} <- decodeJson =<< parseJson """[{"a":2,"b":"stuff"}]"""
+    pure x
+```
+Results in `(Right [{ a: 2, b: "stuff" }])`
+
+See the __argonaut-codecs__ __Quick start__ for more `decodeJson` examples:
+
+https://pursuit.purescript.org/packages/purescript-argonaut-codecs
+
+If you want to `decodeJson` for some type that doesn't already have a `DecodeJson` instance, then you can write a `DecodeJson` instance for your type.
+
+If you want to discover the structure of the JSON, you can write monadic parsers in the `Either` monad with the [`getField*`](https://pursuit.purescript.org/packages/purescript-argonaut-codecs/docs/Data.Argonaut.Decode.Combinators#v:getField) functions. You can also [`preview`](https://pursuit.purescript.org/packages/purescript-profunctor-lenses/docs/Data.Lens#v:preview) the `Json` with [`Argonaut.Prisms`](https://pursuit.purescript.org/packages/purescript-argonaut-traversals/docs/Data.Argonaut.Prisms).
+
+
+#### 2. Simple.JSON
+
+The [`Simple.JSON.read'`](https://pursuit.purescript.org/packages/purescript-simple-json/docs/Simple.JSON#v:read') function can infer the expected structure of JSON from the PureScipt data type that we are trying to read into.
+
+https://purescript-simple-json.readthedocs.io/en/latest/intro.html
+
+The automatic decoding in `Simple.JSON` is based on the[`ReadForeign`](https://pursuit.purescript.org/packages/purescript-simple-json/docs/Simple.JSON#t:ReadForeign) typeclass instead of the `DecodeJson` typeclass.
+
+#### 3. F Monad
+
+The most powerful and general way to read foreign data is by writing monadic parsers for the [`F` monad](https://pursuit.purescript.org/packages/purescript-foreign/docs/Foreign#t:F).  You run the parser with [`runExcept`](https://pursuit.purescript.org/packages/purescript-transformers/docs/Control.Monad.Except#v:runExcept). 
 
 If `blob :: Foreign` is a JSON object which we expect to be an array of records, each with a string field named `"thing"`, then we can parse it into PureScript with the `F` monad like this:
 
@@ -418,22 +462,22 @@ import Foreign (Foreign, readArray, readString)
 import Foreign.Index (readProp)
 import Control.Monad.Except (runExcept)
 
-result :: Either MultipleErrors (Array {type :: String})
+result :: Either MultipleErrors (Array {thing :: String})
 result = runExcept do
   xs <- readArray blob
   for xs \x -> do
     t <- readString =<< readProp "thing" x
-    pure {type:t}
+    pure {thing:t}
 ```
 
 Then the `result` will be either the array of records, or a list of errors explaining exactly how the JSON structure was not what we expected it to be.
 
-The basic philosophy here is [Parse, don’t validate.](http://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/)
+#### 4. codec-argonaut
 
-If we have a PureScript data type which we want to translate the JSON object into, then
-we can use
-[`Simple.JSON.read'`](https://pursuit.purescript.org/packages/purescript-simple-json/docs/Simple.JSON#v:read')
-to automatically parse the JSON object into our PureScript type.
+> “The [codec-argonaut ](https://github.com/garyb/purescript-codec-argonaut) library is used by those of us who like a [less typeclass-reliant ](http://code.slipthrough.net/2018/03/13/thoughts-on-typeclass-codecs/) version of handling things too.”
+>
+> [— Gary Burgess](https://discourse.purescript.org/t/how-to-read-cast-validate-json-in-purescript/2452/2)
+
 
 ## vscode
 
@@ -484,7 +528,7 @@ exports.spinner = require('assets/spinner.png').default;
 
 When we want to write inline CSS instead of a stylesheet but we also want to use
 [CSS selector combinators](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors#combinators),
-then we will want to use the older
+then we will want a CSS class generation library. Either the older
 [__styled-components__](https://styled-components.com/)
 or the newer, better
 [__emotion__](https://emotion.sh/).
@@ -501,8 +545,8 @@ __emotion__.
 | | TypeScript | PureScript |
 |-|------------|------------|
 | `XMLHTTPRequest` | [__axios__](https://www.npmjs.com/package/axios) | [__affjax__](https://pursuit.purescript.org/packages/purescript-affjax) |
-| CSS class generation | [__styled-components__](https://styled-components.com/) | [__react-basic-emotion__](https://pursuit.purescript.org/packages/purescript-react-basic-emotion) |
-| React router | | [__react-basic-router__](https://github.com/xc-jp/purescript-react-basic-router) |
+| CSS class generation | [__styled-components__](https://styled-components.com/) [__@emotion/styled__](https://emotion.sh/docs/styled) | [__react-basic-emotion__](https://pursuit.purescript.org/packages/purescript-react-basic-emotion) |
+| React Router Web | [__@types/react-router-dom__](https://www.npmjs.com/package/@types/react-router-dom) | [__react-basic-router__](https://github.com/xc-jp/purescript-react-basic-router) |
 | String interpolation | | [__interpolate__](https://pursuit.purescript.org/packages/purescript-interpolate/) |
 | Loader for WebPack | | [__purs-loader__](https://github.com/ethul/purs-loader) [__craco-purscript-loader__](https://github.com/andys8/craco-purescript-loader) |
 
