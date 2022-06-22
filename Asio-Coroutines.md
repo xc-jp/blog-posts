@@ -1,4 +1,8 @@
-# Composing C++20 Asio coroutines
+---
+title: "Composing C++20 Asio coroutines"
+author: "James Brock"
+date: 2022.03.03
+---
 
 C++20 coroutines are here, and the support for them in Boost 1.78 Asio is very good. 
 They are, however, a bit tricky to use. 
