@@ -1,5 +1,3 @@
-# エンジニアブログ
-
 | Date       | Title                                       | Author      |
 | :---       | :---                                        | :---        |
 | 2022.03.03 | [Asio-Coroutines](Asio-Coroutines.md)       | James Brock |
