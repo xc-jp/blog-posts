@@ -1,5 +1,9 @@
-
 # A Character-Driven Monad Tutorial with a Three-Act Structure
+
+<p align="center">
+date: 2021.07.15<br>
+author: James Brock
+</p>
 
 Here is my contribution to this genre. To be presented at the *Agora* at Cross Compass in Tokyo, 2021.
 
