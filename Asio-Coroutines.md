@@ -1,7 +1,7 @@
 # Composing C++20 Asio coroutines
 
-<p aling="center">
-date: 2022.03.03
+<p align="center">
+date: 2022.03.03<br>
 author: James Brock
 </p>
 
