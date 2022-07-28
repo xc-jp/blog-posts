@@ -1,13 +1,25 @@
-Nix and NixOps at Cross Compass: Introduction
-=============================================
+---
+layout: default
+title: Nix and NixOps at Cross Compass
+date: 2019.10.07
+author: Robert Prije
+tags: [ruby on rails, nix, NixOps]
+excerpt: History of how Cross Compass engineers used Nix and NixOps
+---
+
+# Nix and NixOps at Cross Compass: Introduction
+
+<p align="center">
+date: 2019.11.19<br>
+author: Robert Prije
+</p>
 
 This is the first blog post of a mini-series of blog posts describing our
 experiences with using Nix and NixOps at Cross Compass. Through this series
 of blog posts, we hope to document what we've learned along the way, both for
 our own reference and to help anyone else who may be attempting similar things.
 
-Background
-----------
+## Background
 
 Cross Compass is developing a web service built around a software suite
 developed in Haskell with a Ruby on Rails backend and a frontend developed using
@@ -48,8 +60,7 @@ The other main problem is that Nix can be a little hard to break into with
 few good examples to follow. This blog series will hopefully help a little
 with that.
 
-Coming Up
----------
+## Coming Up
 
 Future blog posts will document the journey to getting automatic deployments of
 our full stack web application to GCE using NixOps. In particular we will cover:

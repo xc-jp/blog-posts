@@ -1,4 +1,18 @@
+---
+layout: default
+title: Deploying a Ruby on Rails Application with NixOps
+date: 2019.11.19
+author: Robert Prije
+tags: [Ruby on Rails, Nix, NixOps]
+excerpt: How to use NixOps to deploy Ruby on Rails application
+---
+
 # Deploying a Ruby on Rails Application with NixOps
+
+<p align="center">
+date: 2019.11.19<br>
+author: Robert Prije
+</p>
 
 [Rails](https://rubyonrails.org/) applications depend on installed Ruby
 libraries provided by gems. Usually gems are installed imperatively. However,

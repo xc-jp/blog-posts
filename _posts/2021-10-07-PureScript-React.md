@@ -1,3 +1,12 @@
+---
+layout: default
+title: How to write PureScript React to replace TypeScript React in 2021
+date: 2021.10.07
+author: James Brock
+tags: [PureScript, TypeScript, React] 
+excerpt: Motivation of switching TypeScript to PureScript
+---
+
 # How to write PureScript React to replace TypeScript React in 2021
 
 <p align="center">

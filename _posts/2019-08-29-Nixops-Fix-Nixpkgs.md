@@ -1,5 +1,18 @@
-Fixing Nixpkgs in NixOps
-========================
+---
+layout: default
+title: Fixing Nixpkgs in NixOps
+date: 2019.08.29
+author: Robert Prije
+tags: [Nix, NixOps, Nixpkgs]
+excerpt: Guide how to use NixOps to fix Mixpkgs
+---
+
+# Fixing Nixpkgs in NixOps
+
+<p align="center">
+date: 2019.08.29<br>
+author: Robert Prije
+</p>
 
 When building with Nix, one of the typical things developers will want to do is
 fix the version of Nixpkgs being used. For those not already familiar,
@@ -50,8 +63,7 @@ the physical specification to a different platform:
 }
 ```
 
-The logical specification of the box to deploy with dhall installed and
-without a fixed Nixpkgs:
+The logical specification of the box to deploy with dhall installed and without a fixed Nixpkgs:
 
 `example.nix`:
 
@@ -241,8 +253,7 @@ installed, the shell will take care of ensuring `nixops` is available.
 As long as `nix-shell` is run before any `nixops` commands, the correct version
 of Nixpkgs will always be used.
 
-References
-----------
+## References
 
 * [The Official NixOps Manual](https://nixos.org/nixops/manual/)
 * [Discourse discussion on pinning Nixpkgs in NixOps](https://discourse.nixos.org/t/nixops-pinning-nixpkgs/734)

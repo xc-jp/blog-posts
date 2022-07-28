@@ -1,3 +1,12 @@
+---
+layout: default
+title: A Character-Driven Monad Tutorial with a Three-Act Structure
+date: 2021.07.15
+author: James Brock
+tags: [Functional programming, Monad]  
+excerpt: Overview of programming language development
+---
+
 # A Character-Driven Monad Tutorial with a Three-Act Structure
 
 <p align="center">

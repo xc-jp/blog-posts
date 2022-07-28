@@ -1,3 +1,17 @@
 plugins:
   - jemoji
   - jekyll-include-cache
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE
+  - README.md
+  - _posts/2021-07-15-The-Monad-Tutorial.md
+  - _posts/2022-06-21-Protocol-Buffers.md
+
+# multilang
+languages: ['ja', 'en']
+default_lang: 'ja'
+exclude_from_localization: ['javascript', 'images', 'css']
+parallel_localization: false

@@ -1,4 +1,2 @@
-| Date       | Title                                       | Author      |
-| :---       | :---                                        | :---        |
-| 2022.03.03 | [Asio-Coroutines](Asio-Coroutines.md)       | James Brock |
-| 2021.10.07 | [PureScript-React](PureScript-React.md)     | James Brock |
+This is the blog site maintained by Cross Compass engineers.<br>
+You can see our engineers' real activities or interests, and know if you maybe want to join our teams.
