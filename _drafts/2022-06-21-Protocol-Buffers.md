@@ -3,7 +3,7 @@ layout: default
 title: Understanding Protobuf
 date: 2022.06.21
 author: Jonas Carpay
-tags: [Google, Protocol Buffers]
+tags: Google "Protocol Buffers"
 excerpt: Overview of Protocol Buffers
 ---
 

@@ -3,7 +3,7 @@ layout: default
 title: Passing Dynamic Arguments to NixOps
 date: 2019.09.24
 author: Robert Prije
-tags: [Nix, NixOps]
+tags: Nix NixOps
 excerpt: Guide how to use NixOps
 ---
 

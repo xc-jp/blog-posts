@@ -3,7 +3,7 @@ layout: default
 title: Deploying a Ruby on Rails Application with NixOps
 date: 2019.11.19
 author: Robert Prije
-tags: [Ruby on Rails, Nix, NixOps]
+tags: "Ruby on Rails" Nix NixOps
 excerpt: How to use NixOps to deploy Ruby on Rails application
 ---
 

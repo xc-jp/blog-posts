@@ -1,3 +1,16 @@
+defaults:
+  # _posts
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      comments: true
+      share: true
+      related: true
+
 plugins:
   - jemoji
   - jekyll-include-cache
@@ -7,8 +20,6 @@ exclude:
   - Gemfile.lock
   - LICENSE
   - README.md
-  - _posts/2021-07-15-The-Monad-Tutorial.md
-  - _posts/2022-06-21-Protocol-Buffers.md
 
 # multilang
 languages: ['ja', 'en']

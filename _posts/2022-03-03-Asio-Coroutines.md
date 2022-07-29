@@ -3,7 +3,7 @@ layout: default
 title: Composing C++20 Asio coroutines
 date: 2022.03.03
 author: James Brock
-tags: [Boost, Asio, coroutine functions, C++20] 
+tags: Boost Asio "coroutine functions" C++20 
 excerpt: Explanation how to use Boost 1.78 Asio
 ---
 
