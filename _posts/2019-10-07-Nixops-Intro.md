@@ -1,6 +1,6 @@
 ---
 layout: single
-title: Nix and NixOps at Cross Compass: Introduction
+title: Nix and NixOps at Cross Compass - Introduction
 issue-date: 2019.10.07
 author: Robert Prije
 tags: ["Ruby on Rails", Nix", "NixOps"]
