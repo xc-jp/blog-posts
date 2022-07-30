@@ -7,8 +7,6 @@ tags: Nix NixOps Nixpkgs
 excerpt: Guide how to use NixOps to fix Mixpkgs
 ---
 
-# Fixing Nixpkgs in NixOps
-
 <p align="center">
 date: 2019.08.29<br>
 author: Robert Prije

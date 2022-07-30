@@ -7,8 +7,6 @@ tags: Nix NixOps
 excerpt: Guide how to use NixOps
 ---
 
-# Passing Dynamic Arguments to NixOps
-
 <p align="center">
 date: 2019.09.24<br>
 author: Robert Prije

@@ -7,8 +7,6 @@ tags: Nix NixOps
 excerpt: Explaining very basic of NixOps
 ---
 
-# NixOps Fundamentals
-
 <p align="center">
 date: 2019.10.07<br>
 author: Robert Prije

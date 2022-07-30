@@ -7,8 +7,6 @@ tags: Boost Asio "coroutine functions" C++20
 excerpt: Explanation how to use Boost 1.78 Asio
 ---
 
-# Composing C++20 Asio coroutines
-
 <p align="center">
 date: 2022.03.03<br>
 author: James Brock

@@ -7,8 +7,6 @@ tags: ["GitHub Actions", "CI"]
 excerpt: Continous integration and delivery by using GitHub Actions
 ---
 
-# GitHub Actions CI/CD
-
 <p align="center">
 date: 2022.05.10<br>
 author: Liu Yuxi
