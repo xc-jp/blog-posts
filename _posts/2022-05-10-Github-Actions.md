@@ -65,13 +65,13 @@ Setup hierarchy:
 - **DO NOT** use self-hosted runners for a public repository
     - Risk: allow arbitrary code execution on your machine.
     - Configurable requirement for PR: e.g. approval from someone with write access.
-- Secrets from settings: `${{ secrets.PASSWORD }}`
+- Secrets from settings: `$\{\{ secrets.PASSWORD \}\}`
     - For self-hosted runners, store on the machine instead.
 
 ## Techniques
 ### Expressions
 
-Use `${{ <expression> }}` to pragmatically generate configuration.
+Use `$\{\{ <expression> \}\}` to pragmatically generate configuration.
 
 - Literals: null, true, 42, 'spam'
 - Operators: matrix.device == 'cpu'
@@ -86,13 +86,13 @@ Use `${{ <expression> }}` to pragmatically generate configuration.
 
 ### Contexts
 
-Variables of workflow information, `${{ <context> }}`
+Variables of workflow information, `$\{\{ <context> \}\}`
 
 Conditional execution example:
 
 ```yaml
-- run: mkdir ${{ github.job }}
-if: ${{ github.ref == 'refs/heads/main' }}
+- run: mkdir $\{\{ github.job \}\}
+if: $\{\{ github.ref == 'refs/heads/main' \}\}
 ```
 
 ### Triggering a workflow
@@ -118,7 +118,7 @@ jobs:
   job2:
     needs: job1
   job3:
-    if: ${{ always() }}
+    if: $\{\{ always() \}\}
     needs: [job1, job2]
 ```
 
@@ -140,7 +140,7 @@ When registering runners, set corresponding labels.
 Procedurally generate build configuration combinations.
 
 ```yaml
-runs-on: ${{ matrix.os }}
+runs-on: $\{\{ matrix.os \}\}
 strategy:
   matrix:
     node: [8, 10, 12, 14]
@@ -195,7 +195,7 @@ jobs:
     env:
       Greeting: Hello
     steps:
-      - if: ${{ env.DAY_OF_WEEK == 'Monday' }}
+      - if: $\{\{ env.DAY_OF_WEEK == 'Monday' \}\}
         run: echo ”$Greeting $First_Name. Today is $DAY_OF_WEEK!”
         env:
           First_Name: Mona
@@ -256,7 +256,7 @@ For hosted artifact storage:
 Our solution for hosted runners:
 
 ```yaml
-upload-artifacts ”Result tarballs” ${{ github.job }}
+upload-artifacts ”Result tarballs” $\{\{ github.job \}\}
 result '*.tar.gz'
 ```
 
@@ -299,7 +299,7 @@ However,
 strategy:
   matrix:
     device: [cpu, gpu]
-runs-on: [self-hosted, ${{ matrix.device }}]
+runs-on: [self-hosted, $\{\{ matrix.device \}\}]
 ```
 
 but this works:
@@ -307,7 +307,7 @@ but this works:
 ```yaml
 runs-on:
 - self-hosted
-- ${{ matrix.device }}
+- $\{\{ matrix.device }}
 ```
 
 ### Context availability
@@ -315,9 +315,9 @@ runs-on:
 ```yaml
 test-context:
   steps:
-    - name: ${{ github.job }}
+    - name: $\{\{ github.job \}\}
       run: ...
-    - run: echo ${{ github.job }}
+    - run: echo $\{\{ github.job \}\}
 ```
 
 github.job: job id (i.e. test-context)
