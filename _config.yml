@@ -16,7 +16,7 @@ plugins:
   - jekyll-include-cache
   - purescript.rb
 
-markdown: kramdown
+#markdown: kramdown
 
 exclude:
   - Gemfile
