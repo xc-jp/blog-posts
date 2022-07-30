@@ -331,7 +331,7 @@ We’ll use the type [`FunctionComponent`](https://github.com/DefinitelyTyped/De
 [`React.Basic.Hooks.reactComponent`](https://pursuit.purescript.org/packages/purescript-react-basic-hooks/6.2.0/docs/React.Basic.Hooks#v:reactComponent).
 
 
-https://www.typescriptlang.org/docs/handbook/modules.html#ambient-modules
+[https://www.typescriptlang.org/docs/handbook/modules.html#ambient-modules](https://www.typescriptlang.org/docs/handbook/modules.html#ambient-modules)
 
 __`types/purs/MyModule.d.ts`__
 
