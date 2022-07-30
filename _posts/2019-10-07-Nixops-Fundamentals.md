@@ -1,7 +1,7 @@
 ---
 layout: single
 title: NixOps Fundamentals
-date: 2019.10.07
+issue-date: 2019.10.07
 author: Robert Prije
 tags: Nix NixOps
 excerpt: Explaining very basic of NixOps

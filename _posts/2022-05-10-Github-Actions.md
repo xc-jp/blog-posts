@@ -1,7 +1,7 @@
 ---
 layout: single
 title: GitHub Actions CI/CD
-date: 2022.05.10
+issue-date: 2022.05.10
 author: Liu Yuxi
 tags: ["GitHub Actions", "CI"] 
 excerpt: Continous integration and delivery by using GitHub Actions

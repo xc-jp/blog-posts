@@ -1,7 +1,7 @@
 ---
 layout: single
 title: Fixing Nixpkgs in NixOps
-date: 2019.08.29
+issue-date: 2019.08.29
 author: Robert Prije
 tags: Nix NixOps Nixpkgs
 excerpt: Guide how to use NixOps to fix Mixpkgs
