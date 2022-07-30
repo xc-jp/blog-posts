@@ -7,11 +7,6 @@ tags: ["GitHub Actions", "CI"]
 excerpt: Continous integration and delivery by using GitHub Actions
 ---
 
-<p align="center">
-date: 2022.05.10<br>
-author: Liu Yuxi
-</p>
-
 ## Introduction
 ### What is CI/CD
 
@@ -48,7 +43,7 @@ Setup hierarchy:
 - **Step**: an action or a script
 - **Action**: a configurable and reusable script (c.f. a function)
 
-![](assets/overview-actions-simple.png)
+![](/assets/overview-actions-simple.png)
 Figure 1: Runtime overview
 
 ### Advantages of GitHub Actions
@@ -250,11 +245,12 @@ Also constrained by:
 - Storage limit (may generate billing)
 
 For hosted artifact storage:
-- actions/upload-artifact [^1]
-- actions/download-artifact [^2]
+- actions/upload-artifact[^1]
+- actions/download-artifact[^2]
 
-[^1] https://github.com/actions/upload-artifact
-[^2] https://github.com/actions/download-artifact
+[^1]: https://github.com/actions/upload-artifact
+[^2]: https://github.com/actions/download-artifact
+
 
 Our solution for hosted runners:
 

@@ -7,11 +7,6 @@ tags: Nix NixOps
 excerpt: Guide how to use NixOps
 ---
 
-<p align="center">
-date: 2019.09.24<br>
-author: Robert Prije
-</p>
-
 NixOps' declarative configuration is statically defined. But sometimes we want
 parts of the configuration to be dynamic. At Cross Compass there were two
 classes of configurations we wanted to be dynamic: the repository revisions to

@@ -7,11 +7,6 @@ tags: PureScript TypeScript React
 excerpt: Motivation of switching TypeScript to PureScript
 ---
 
-<p align="center">
-date: 2021.10.07<br>
-author: James Brock
-</p>
-
 I refactored several thousand lines of TypeScript React into PureScript React.
 I say “refactor” instead of “rewrite,” because
 the word “rewrite” sometimes causes too much excitement.

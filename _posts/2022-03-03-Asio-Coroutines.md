@@ -7,11 +7,6 @@ tags: Boost Asio "coroutine functions" C++20
 excerpt: Explanation how to use Boost 1.78 Asio
 ---
 
-<p align="center">
-date: 2022.03.03<br>
-author: James Brock
-</p>
-
 C++20 coroutines are here, and the support for them in Boost 1.78 Asio is very good. 
 They are, however, a bit tricky to use. 
 In particular, I had to struggle for a few days to learn how to write Asio coroutine functions

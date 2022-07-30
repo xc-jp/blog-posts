@@ -7,11 +7,6 @@ tags: Nix NixOps Nixpkgs
 excerpt: Guide how to use NixOps to fix Mixpkgs
 ---
 
-<p align="center">
-date: 2019.08.29<br>
-author: Robert Prije
-</p>
-
 When building with Nix, one of the typical things developers will want to do is
 fix the version of Nixpkgs being used. For those not already familiar,
 [Nixpkgs](https://github.com/NixOS/nixpkgs) is the official repository of Nix

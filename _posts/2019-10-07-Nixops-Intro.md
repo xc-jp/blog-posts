@@ -7,11 +7,6 @@ tags: ["Ruby on Rails", Nix", "NixOps"]
 excerpt: History of how Cross Compass engineers used Nix and NixOps
 ---
 
-<p align="center">
-date: 2019.11.19<br>
-author: Robert Prije
-</p>
-
 This is the first blog post of a mini-series of blog posts describing our
 experiences with using Nix and NixOps at Cross Compass. Through this series
 of blog posts, we hope to document what we've learned along the way, both for

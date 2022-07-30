@@ -7,11 +7,6 @@ tags: Nix NixOps
 excerpt: Explaining very basic of NixOps
 ---
 
-<p align="center">
-date: 2019.10.07<br>
-author: Robert Prije
-</p>
-
 Before covering the specific problems we encountered and solved with NixOps,
 we'll go over some fundamentals of NixOps to familiarise you with the tools
 and background that you may need for later posts.
