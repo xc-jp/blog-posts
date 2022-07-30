@@ -50,6 +50,8 @@ Setup hierarchy:
 - **Step**: an action or a script
 - **Action**: a configurable and reusable script (c.f. a function)
 
+![](assets/overview-actions-simple.png)
+Figure 1: Runtime overview
 
 ### Advantages of GitHub Actions
 
@@ -250,11 +252,11 @@ Also constrained by:
 - Storage limit (may generate billing)
 
 For hosted artifact storage:
-- actions/upload-artifact1
-- actions/download-artifact2
+- actions/upload-artifact [^1]
+- actions/download-artifact [^2]
 
-1https://github.com/actions/upload-artifact
-2https://github.com/actions/download-artifact
+[^1] https://github.com/actions/upload-artifact
+[^2] https://github.com/actions/download-artifact
 
 Our solution for hosted runners:
 
