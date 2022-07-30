@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: single
 title: Passing Dynamic Arguments to NixOps
 date: 2019.09.24
 author: Robert Prije

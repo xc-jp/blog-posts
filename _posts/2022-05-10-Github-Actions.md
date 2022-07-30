@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: single
 title: GitHub Actions CI/CD
 date: 2022.05.10
 author: Liu Yuxi

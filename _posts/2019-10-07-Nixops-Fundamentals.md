@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: single
 title: NixOps Fundamentals
 date: 2019.10.07
 author: Robert Prije

@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: single
 title: Fixing Nixpkgs in NixOps
 date: 2019.08.29
 author: Robert Prije

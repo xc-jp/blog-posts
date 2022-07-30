@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: single
 title: How to write PureScript React to replace TypeScript React in 2021
 date: 2021.10.07
 author: James Brock

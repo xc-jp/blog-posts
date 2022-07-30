@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: single
 title: Composing C++20 Asio coroutines
 date: 2022.03.03
 author: James Brock

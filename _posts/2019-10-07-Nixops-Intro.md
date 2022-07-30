@@ -1,9 +1,9 @@
 ---
-layout: default
+layout: single
 title: Nix and NixOps at Cross Compass
 date: 2019.10.07
 author: Robert Prije
-tags: "ruby on rails" nix NixOps
+tags: ["Ruby on Rails", Nix", "NixOps"]
 excerpt: History of how Cross Compass engineers used Nix and NixOps
 ---
 
