@@ -215,7 +215,8 @@ type ArtworksResponse = ArtworksData & ErrorHandling;
 We can use PureScript [Row Polymorphism](https://github.com/purescript/documentation/blob/master/language/Types.md#row-polymorphism) to create equivalent PureScript types
 with the same runtime representation.
 
-```purescript
+[//]: # as of 2022.07.30 Jekyll highligher rouge does not support purescript. So typescript is used instead below. Adding purescript.rb in plugins will not work
+```typescript
 type ErrorHandlingRow r =
   ( success :: Boolean
   , error :: Nullable { message :: String }
@@ -249,7 +250,8 @@ To wrap the foreign `Tags` component in PureScript,
 create files `Tags_.purs` and `Tags_.js`.
 
 __src/Tags_.purs__
-```purescript
+[//]: # as of 2022.07.30 Jekyll highligher rouge does not support purescript. So typescript is used instead below. Adding purescript.rb in plugins will not work
+```typescript
 module Tags (tsxTags) where
 
 import React.Basic (ReactComponent)
@@ -274,7 +276,8 @@ files are foreign.)
 
 Then we can use the foreign component:
 
-```purescript
+[//]: # as of 2022.07.30 Jekyll highligher rouge does not support purescript. So typescript is used instead below. Adding purescript.rb in plugins will not work
+```typescript
 import React.Basic.DOM (div_)
 import React.Basic.Hooks (element)
 import Tags (tsxTags)
@@ -367,7 +370,8 @@ so that we can `push` to a __react-router-dom__ `History` object.
 
 A bit tricky, so here is [the trick](https://lobste.rs/s/wa99yt/coming_purescript_from_haskell_reflex#c_faof1j):
 
-```purescript
+[//]: # as of 2022.07.30 Jekyll highligher rouge does not support purescript. So typescript is used instead below. Adding purescript.rb in plugins will not work
+```typescript
 import Web.DOM.Document (toNonElementParentNode)
 import Web.DOM.NonElementParentNode (getElementById)
 import Web.HTML (window)
@@ -392,7 +396,8 @@ to get the same feature.
 
 Suppose we want to remove an icon after a 20-second vanishing animation.
 
-```purescript
+[//]: # as of 2022.07.30 Jekyll highligher rouge does not support purescript. So typescript is used instead below. Adding purescript.rb in plugins will not work
+```typescript
 React.do
 
   icon /\ setIcon <- useState true
@@ -434,7 +439,8 @@ The classic essay on the general problem of how to read unstructured untyped dat
 
 The [`decodeJson`](https://pursuit.purescript.org/packages/purescript-argonaut/docs/Data.Argonaut#t:DecodeJson) function from __argonaut__ can infer the structure of the JSON you're expecting from the type of the data that you want to cast it to. If the structure of the JSON doesn't match the type, then it returns an error in `Left`.
 
-```purescript
+[//]: # as of 2022.07.30 Jekyll highligher rouge does not support purescript. So typescript is used instead below. Adding purescript.rb in plugins will not work
+```typescript
 show $ do
     x :: Array {a::Int,b::String} <- decodeJson =<< parseJson """[{"a":2,"b":"stuff"}]"""
     pure x
@@ -464,7 +470,8 @@ The most powerful and general way to read foreign data is by writing monadic par
 
 If `blob :: Foreign` is a JSON object which we expect to be an array of records, each with a string field named `"thing"`, then we can parse it into PureScript with the `F` monad like this:
 
-```purescript
+[//]: # as of 2022.07.30 Jekyll highligher rouge does not support purescript. So typescript is used instead below. Adding purescript.rb in plugins will not work
+```typescript
 import Foreign (Foreign, readArray, readString)
 import Foreign.Index (readProp)
 import Control.Monad.Except (runExcept)
