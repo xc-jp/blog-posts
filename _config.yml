@@ -14,7 +14,7 @@ defaults:
 plugins:
   - jemoji
   - jekyll-include-cache
-  - purescript
+  - purescript.rb
 
 markdown: kramdown
 
