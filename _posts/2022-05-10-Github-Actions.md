@@ -86,7 +86,7 @@ Use `${{ \<expression> }}` to pragmatically generate configuration.
 
 ### Contexts
 
-Variables of workflow information, ${{ \<context> }}
+Variables of workflow information, `${{ \<context> }}`
 
 Conditional execution example:
 
