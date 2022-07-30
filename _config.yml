@@ -16,9 +16,6 @@ plugins:
   - jekyll-include-cache
 
 markdown: kramdown
-highlighter: rouge
-    kramdown:
-      input: GFM
 
 exclude:
   - Gemfile
