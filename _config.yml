@@ -14,8 +14,12 @@ defaults:
 plugins:
   - jemoji
   - jekyll-include-cache
+  - _plugins/purescript
 
 markdown: kramdown
+highlighter: rouge
+    kramdown:
+      input: GFM
 
 exclude:
   - Gemfile
