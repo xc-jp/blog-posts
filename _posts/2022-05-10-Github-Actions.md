@@ -43,7 +43,7 @@ Setup hierarchy:
 - **Step**: an action or a script
 - **Action**: a configurable and reusable script (c.f. a function)
 
-![](/assets/images/overview-actions-simple.png)  there is a problem to render the image
+[//]: # ![](/assets/images/overview-actions-simple.png)  there is a problem to render the image
 [//]: # Figure 1: Runtime overview
 
 ### Advantages of GitHub Actions
