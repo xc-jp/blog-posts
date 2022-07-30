@@ -4,7 +4,7 @@ title: Fixing Nixpkgs in NixOps
 issue-date: 2019.08.29
 author: Robert Prije
 tags: Nix NixOps Nixpkgs
-excerpt: Guide how to use NixOps to fix Mixpkgs
+excerpt: Guide how to use NixOps to fix Nixpkgs
 ---
 
 When building with Nix, one of the typical things developers will want to do is
