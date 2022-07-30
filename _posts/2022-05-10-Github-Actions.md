@@ -62,16 +62,20 @@ Setup hierarchy:
 
 ### Security policy
 
+{% raw %}
 - **DO NOT** use self-hosted runners for a public repository
     - Risk: allow arbitrary code execution on your machine.
     - Configurable requirement for PR: e.g. approval from someone with write access.
-- Secrets from settings: `$\{\{ secrets.PASSWORD \}\}`
+- Secrets from settings: `${{ secrets.PASSWORD }}`
     - For self-hosted runners, store on the machine instead.
+{% endraw %}
 
 ## Techniques
 ### Expressions
 
-Use `$\{\{ <expression> \}\}` to pragmatically generate configuration.
+{% raw %}
+Use `${{ <expression> }}` to pragmatically generate configuration.
+{% endraw %}
 
 - Literals: null, true, 42, 'spam'
 - Operators: matrix.device == 'cpu'
@@ -86,14 +90,16 @@ Use `$\{\{ <expression> \}\}` to pragmatically generate configuration.
 
 ### Contexts
 
-Variables of workflow information, `$\{\{ <context> \}\}`
+{% raw %}
+Variables of workflow information, `${{ <context> }}`
 
 Conditional execution example:
 
 ```yaml
-- run: mkdir $\{\{ github.job \}\}
-if: $\{\{ github.ref == 'refs/heads/main' \}\}
+- run: mkdir ${{ github.job }}
+if: ${{ github.ref == 'refs/heads/main' }}
 ```
+{% endraw %}
 
 ### Triggering a workflow
 
@@ -112,15 +118,17 @@ branches:
 
 Jobs run in parallel and may be assigned to different runners.
 
+{% raw %}
 ```yaml
 jobs:
   job1:
   job2:
     needs: job1
   job3:
-    if: $\{\{ always() \}\}
+    if: ${{ always() }}
     needs: [job1, job2]
 ```
+{% endraw %}
 
 [https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions)
 
@@ -139,8 +147,9 @@ When registering runners, set corresponding labels.
 
 Procedurally generate build configuration combinations.
 
+{% raw %}
 ```yaml
-runs-on: $\{\{ matrix.os \}\}
+runs-on: ${{ matrix.os }}
 strategy:
   matrix:
     node: [8, 10, 12, 14]
@@ -152,6 +161,7 @@ strategy:
       - os: macos-latest
         node: 8
 ```
+{% endraw %}
 
 [https://docs.github.com/en/actions/using-jobs/using-a-build-matrix-for-your-jobs](https://docs.github.com/en/actions/using-jobs/using-a-build-matrix-for-your-jobs
 )
@@ -186,6 +196,7 @@ CI=true
 
 ### Setup environment variables
 
+{% raw %}
 ```yaml
 env:
   DAY_OF_WEEK: Monday
@@ -195,11 +206,12 @@ jobs:
     env:
       Greeting: Hello
     steps:
-      - if: $\{\{ env.DAY_OF_WEEK == 'Monday' \}\}
+      - if: ${{ env.DAY_OF_WEEK == 'Monday' }}
         run: echo ”$Greeting $First_Name. Today is $DAY_OF_WEEK!”
         env:
           First_Name: Mona
 ```
+{% endraw %}
 
 [https://docs.github.com/en/actions/learn-github-actions/environment-variables](https://docs.github.com/en/actions/learn-github-actions/environment-variables)
 
@@ -255,10 +267,12 @@ For hosted artifact storage:
 
 Our solution for hosted runners:
 
+{% raw %}
 ```yaml
-upload-artifacts ”Result tarballs” $\{\{ github.job \}\}
+upload-artifacts ”Result tarballs” ${{ github.job }}
 result '*.tar.gz'
 ```
+{% endraw %}
 
 - Each file is stored to a s3 bucket.
 - A public link is added to the log.
@@ -295,30 +309,36 @@ However,
 - No anchors and aliases (&anchor and *anchor)
 - Context expansion may cause syntax errors
 
+{% raw %}
 ```yaml
 strategy:
   matrix:
     device: [cpu, gpu]
-runs-on: [self-hosted, $\{\{ matrix.device \}\}]
+runs-on: [self-hosted, ${{ matrix.device }}]
 ```
+{% endraw %}
 
 but this works:
 
+{% raw %}
 ```yaml
 runs-on:
 - self-hosted
-- $\{\{ matrix.device }}
+- ${{ matrix.device }}
 ```
+{% endraw %}
 
 ### Context availability
 
+{% raw %}
 ```yaml
 test-context:
   steps:
-    - name: $\{\{ github.job \}\}
+    - name: ${{ github.job }}
       run: ...
-    - run: echo $\{\{ github.job \}\}
+    - run: echo ${{ github.job }}
 ```
+{% endraw %}
 
 github.job: job id (i.e. test-context)
 
