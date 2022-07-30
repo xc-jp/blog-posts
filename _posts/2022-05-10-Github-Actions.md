@@ -65,13 +65,13 @@ Setup hierarchy:
 - **DO NOT** use self-hosted runners for a public repository
     - Risk: allow arbitrary code execution on your machine.
     - Configurable requirement for PR: e.g. approval from someone with write access.
-- Secrets from settings: `$\{\{ secrets.PASSWORD }}`
+- Secrets from settings: `${{ secrets.PASSWORD }}`
     - For self-hosted runners, store on the machine instead.
 
 ## Techniques
 ### Expressions
 
-Use `$\{\{ \<expression> }}` to pragmatically generate configuration.
+Use `${{ <expression> }}` to pragmatically generate configuration.
 
 - Literals: null, true, 42, 'spam'
 - Operators: matrix.device == 'cpu'
@@ -86,7 +86,7 @@ Use `$\{\{ \<expression> }}` to pragmatically generate configuration.
 
 ### Contexts
 
-Variables of workflow information, `$\{\{ \<context> }}`
+Variables of workflow information, `${{ <context> }}`
 
 Conditional execution example:
 
