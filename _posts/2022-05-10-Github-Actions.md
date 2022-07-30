@@ -22,7 +22,7 @@ For this, we need **automation**.
 
 ### GitHub Actions overview
 
-```script
+```yaml
 name: learn-github-actions
 on: push
 jobs:
@@ -43,8 +43,8 @@ Setup hierarchy:
 - **Step**: an action or a script
 - **Action**: a configurable and reusable script (c.f. a function)
 
-![](/assets/overview-actions-simple.png)
-Figure 1: Runtime overview
+[//]: # ![](/assets/overview-actions-simple.png)  there is a problem to render the image
+[//]: # Figure 1: Runtime overview
 
 ### Advantages of GitHub Actions
 
@@ -65,13 +65,13 @@ Figure 1: Runtime overview
 - **DO NOT** use self-hosted runners for a public repository
     - Risk: allow arbitrary code execution on your machine.
     - Configurable requirement for PR: e.g. approval from someone with write access.
-- Secrets from settings: ${{ secrets.PASSWORD }}
+- Secrets from settings: $\{\{ secrets.PASSWORD }}
     - For self-hosted runners, store on the machine instead.
 
 ## Techniques
 ### Expressions
 
-Use ${{ <expression> }} to pragmatically generate configuration.
+Use $\{\{ \<expression> }} to pragmatically generate configuration.
 
 - Literals: null, true, 42, 'spam'
 - Operators: matrix.device == 'cpu'
@@ -82,21 +82,22 @@ Use ${{ <expression> }} to pragmatically generate configuration.
 - Job status: cancelled()
 - Object filters: fruits.*.name
 
-https://docs.github.com/en/actions/learn-github-actions/expressions
+[https://docs.github.com/en/actions/learn-github-actions/expressions](https://docs.github.com/en/actions/learn-github-actions/expressions)
 
 ### Contexts
 
-Variables of workflow information, ${{ <context> }}
+Variables of workflow information, $\{\{ \<context> }}
+
 Conditional execution example:
 
-```
-- run: mkdir ${{ github.job }}
-if: ${{ github.ref == 'refs/heads/main' }}
+```yaml
+- run: mkdir $\{\{ github.job }}
+if: $\{\{ github.ref == 'refs/heads/main' }}
 ```
 
 ### Triggering a workflow
 
-```
+```yaml
 on: push
 on:
 push:
@@ -105,23 +106,23 @@ branches:
 - '!releases/**-alpha'
 ```
 
-https://docs.github.com/en/actions/using-workflows/triggering-a-workflow
+[https://docs.github.com/en/actions/using-workflows/triggering-a-workflow](https://docs.github.com/en/actions/using-workflows/triggering-a-workflow)
 
 ### Jobs: dependency
 
 Jobs run in parallel and may be assigned to different runners.
 
-```
+```yaml
 jobs:
   job1:
   job2:
     needs: job1
   job3:
-    if: ${{ always() }}
+    if: $\{\{ always() }}
     needs: [job1, job2]
 ```
 
-https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions
+[https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions)
 
 ### Jobs: runner selection
 
@@ -138,8 +139,8 @@ When registering runners, set corresponding labels.
 
 Procedurally generate build configuration combinations.
 
-```
-runs-on: ${{ matrix.os }}
+```yaml
+runs-on: $\{\{ matrix.os }}
 strategy:
   matrix:
     node: [8, 10, 12, 14]
@@ -152,11 +153,12 @@ strategy:
         node: 8
 ```
 
-https://docs.github.com/en/actions/using-jobs/using-a-build-matrix-for-your-jobs
+[https://docs.github.com/en/actions/using-jobs/using-a-build-matrix-for-your-jobs](https://docs.github.com/en/actions/using-jobs/using-a-build-matrix-for-your-jobs
+)
 
 ### Timeout
 
-```
+```yaml
 jobs:
   job1:
     timeout-minutes: 480
@@ -165,12 +167,11 @@ jobs:
       - timeout-minutes: 120
 ```
 
-https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-
-actions#jobsjob_idstepstimeout-minutes
+[https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepstimeout-minutes](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepstimeout-minutes)
 
 ### Default environment variables
 
-```
+```bash
 $ printenv
 ...
 RUNNER_TRACKING_ID=github_6d8c2243-acee-49c5-8c10-f774111d02bc
@@ -180,12 +181,12 @@ CI=true
 ...
 ```
 
-https://docs.github.com/en/enterprise-server@3.4/actions/learn-github-actions/environment-
-variables#default-environment-variables
+[https://docs.github.com/en/enterprise-server@3.4/actions/learn-github-actions/environment-variables#default-environment-variables](https://docs.github.com/en/enterprise-server@3.4/actions/learn-github-actions/environment-variables#default-environment-variables
+)
 
 ### Setup environment variables
 
-```
+```yaml
 env:
   DAY_OF_WEEK: Monday
 jobs:
@@ -194,40 +195,40 @@ jobs:
     env:
       Greeting: Hello
     steps:
-      - if: ${{ env.DAY_OF_WEEK == 'Monday' }}
+      - if: $\{\{ env.DAY_OF_WEEK == 'Monday' }}
         run: echo ”$Greeting $First_Name. Today is $DAY_OF_WEEK!”
         env:
           First_Name: Mona
 ```
 
-https://docs.github.com/en/actions/learn-github-actions/environment-variables
+[https://docs.github.com/en/actions/learn-github-actions/environment-variables](https://docs.github.com/en/actions/learn-github-actions/environment-variables)
 
 #### Setup environment variables from the script
 
-```
+```yaml
 - run: export HOSTNAME=$(hostname --fqdn)
 - run: echo ”$HOSTNAME”
 ```
 
 HOSTNAME is not available in the second run step.
 
-```
+```yaml
 - run: echo ”HOSTNAME=$(hostname --fqdn)” >> $GITHUB_ENV
 - run: echo ”$HOSTNAME”
 ```
 
 HOSTNAME will be available for all steps after it.
 
-https://stackoverflow.com/a/57969570
+[https://stackoverflow.com/a/57969570](https://stackoverflow.com/a/57969570)
 
-```
+```yaml
 - run: echo ”HOSTNAME=$(hostname --fqdn)” >> $GITHUB_ENV
 - run: echo ”$HOSTNAME”
 ```
 
 Under the hood, appending to a temporary file:
 
-```
+```bash
 $ echo $GITHUB_ENV
 /run/github-runner/.../_temp/_runner_file_commands/
 set_env_63e44268-e0e8-4bfc-839e-e8aed075a6b6
@@ -248,14 +249,14 @@ For hosted artifact storage:
 - actions/upload-artifact[^1]
 - actions/download-artifact[^2]
 
-[^1]: https://github.com/actions/upload-artifact
-[^2]: https://github.com/actions/download-artifact
+[^1]: [https://github.com/actions/upload-artifact](https://github.com/actions/upload-artifact)
+[^2]: [https://github.com/actions/download-artifact](https://github.com/actions/download-artifact)
 
 
 Our solution for hosted runners:
 
-```
-upload-artifacts ”Result tarballs” ${{ github.job }}
+```yaml
+upload-artifacts ”Result tarballs” $\{\{ github.job }}
 result '*.tar.gz'
 ```
 
@@ -265,7 +266,7 @@ result '*.tar.gz'
 - Only those who has access to the log has access to the artifacts.
 - The retention policy is set separately.
 
-```
+```bash
 echo ”::group::$1”
 UUID=”$(uuidgen)”
 export TARGET=”$2/$UUID”
@@ -294,29 +295,29 @@ However,
 - No anchors and aliases (&anchor and *anchor)
 - Context expansion may cause syntax errors
 
-```
+```yaml
 strategy:
   matrix:
     device: [cpu, gpu]
-runs-on: [self-hosted, ${{ matrix.device }}]
+runs-on: [self-hosted, $\{\{ matrix.device }}]
 ```
 
 but this works:
 
-```
+```yaml
 runs-on:
 - self-hosted
-- ${{ matrix.device }}
+- $\{\{ matrix.device }}
 ```
 
 ### Context availability
 
-```
+```yaml
 test-context:
   steps:
-    - name: ${{ github.job }}
+    - name: $\{\{ github.job }}
       run: ...
-    - run: echo ${{ github.job }}
+    - run: echo $\{\{ github.job }}
 ```
 
 github.job: job id (i.e. test-context)
@@ -332,17 +333,17 @@ In some cases, it even becomes run.
 
 but it’s not clear when.
 
-https://docs.github.com/en/actions/learn-github-actions/contexts#context-availability
+[https://docs.github.com/en/actions/learn-github-actions/contexts#context-availability](https://docs.github.com/en/actions/learn-github-actions/contexts#context-availability)
 
 ### Isolation?
 
-```
+```yaml
 - run: mkdir test-dir
 ```
 
 Where is test-dir after the run? Is it cleared?
 
-```
+```bash
 $ sudo ls -la /run/github-runner/.../ci-experiments/ci-experiments \
   | tail -n +2 | tr -s ' ' | cut -d' ' -f1,3,4,9
 drwx--x--x github-runner github-runner .
