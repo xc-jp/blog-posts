@@ -43,10 +43,7 @@ Setup hierarchy:
 - **Step**: an action or a script
 - **Action**: a configurable and reusable script (c.f. a function)
 
-{% raw %}
-![]({{ site.url }}{{ site.baseurl }}/assets/images/overview-actions-simple.png)
-{% endraw %}
-Figure 1: Runtime overview
+{% include image.html file="overview-actions-simple.png" alt="Runtime overview" caption="Figure 1: Runtime overview" %}
 
 ### Advantages of GitHub Actions
 
