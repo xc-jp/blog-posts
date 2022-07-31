@@ -10,8 +10,21 @@ All content is copyright Cross Compass LLC 2021.
 
 ## Building
 
-To locally `pandoc` all of the `*.md` files into `result/*.html` files,
+HTML files will be automatically created by GitHub Pages.
+Create a .md file to be posted under "\_posts" folder in the rule "YYYY-MM-DD-(name).md".
+The folder "\_draft" can be used to keep the files not to be posted.
+Images that will be embedded in pages should be kept under /assets/images/ folder.
 
-```
-nix-build
-```
+Remember to add following block to be properly processed.
+The first entry layout should be "single".
+---
+layout: single
+title: (title of the post)
+issue-date: 2022.01.01
+author: name
+tags: tag1 tag2
+excerpt: Short description of the post
+---
+
+To build locally, Jekyll should be installed. https://jekyllrb.com/
+Then Jekyll theme: https://mademistakes.com/work/minimal-mistakes-jekyll-theme/
