@@ -34,7 +34,7 @@ layout: default
           </h1>{% endif %}
 
           <p align="center">
-            Date: {{ page.issue-date }}<br>
+            Date: {{ page.issue-date | date_to_string | date: "%b. %d, %Y"}}<br>
             By: {{ page.author }}
           </p>	 
 
