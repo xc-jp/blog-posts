@@ -16,8 +16,6 @@ plugins:
   - jekyll-include-cache
   - purescript.rb
 
-#markdown: kramdown
-
 exclude:
   - Gemfile
   - Gemfile.lock
@@ -29,3 +27,6 @@ languages: ['ja', 'en']
 default_lang: 'ja'
 exclude_from_localization: ['javascript', 'images', 'css']
 parallel_localization: false
+url: https://xc-jp.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+baseurl: "/blog-posts" # the subpath of your site, e.g. "/blog"
+repository: "xc-jp/blog-posts"
