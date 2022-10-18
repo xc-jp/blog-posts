@@ -563,5 +563,6 @@ __emotion__.
 | React Router Web | [__@types/react-router-dom__](https://www.npmjs.com/package/@types/react-router-dom) | [__react-basic-router__](https://github.com/xc-jp/purescript-react-basic-router) |
 | String interpolation | | [__interpolate__](https://pursuit.purescript.org/packages/purescript-interpolate/) |
 | Loader for WebPack | | [__purs-loader__](https://github.com/ethul/purs-loader) [__craco-purscript-loader__](https://github.com/andys8/craco-purescript-loader) |
+| State Management | [__@types/react-redux__](https://www.npmjs.com/package/@types/react-redux) | React is already a state management framework, you don’t need __redux__ or anything else. Use a State Hook instead.|
 
 
