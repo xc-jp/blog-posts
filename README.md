@@ -1,8 +1,10 @@
-Blog Posts README
-=================
+Blog Posts
+==========
 
 This repository contains a series of blog posts intended for posting on the
 Cross Compass website.
+
+Published at: https://xc-jp.github.io/blog-posts/
 
 Code: https://github.com/xc-jp/blog-post-code
 
