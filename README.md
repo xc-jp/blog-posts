@@ -31,5 +31,7 @@ excerpt: Short description of the post
 ---
 ```
 
+As of 2023.05.25, the feature to showing tag list and filter the entries is not yet realized.
+
 To build locally, Jekyll should be installed. https://jekyllrb.com/
 Then Jekyll theme: https://mademistakes.com/work/minimal-mistakes-jekyll-theme/
