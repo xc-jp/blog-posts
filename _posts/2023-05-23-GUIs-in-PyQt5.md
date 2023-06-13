@@ -1,17 +1,17 @@
-# Ramin Honary
-
-  - Worked at Cross Compass since 2018
-  - Platform Team development, full stack
-  - Worked primarily on Manufacia
-  - Currently on working on ML-Platform
-
-## Why I use PyQt
+# Why I use PyQt
 
   - Developed some Python scripts that used **OpenCV**
-      - "Pattern Matching Kit" (will demo)
-      - "Image Cropping Kit" (in progress)
+      - "Pattern Matching Kit"
+      - "Image Cropping Kit"
   - OpenCV provides a API for GUI tools based on PyQt
   - Decided to use PyQt directly instead of OpenCV specific API
+
+## Other reasons to use PyQt
+
+  - **Cross platform** -- write once, run on multiple platforms.
+  - **Rapid prototyping** -- less combersome than C++
+  - **Native widgets** -- makes use of native widgets when possible
+  - **2D graphics model** -- complete API for interactive 2D visualizations
 
 # Part 1: What is Qt
 
@@ -21,8 +21,8 @@ Qt is a cross-platform desktop computing GUI framework
     - Option of buying commercial licenses
   - Develops native apps for
     - Windows, MacOS
-  - Linux
-    - Core of the KDE Plasma desktop environment
+    - Linux
+      - Core of the KDE Plasma desktop environment
 
 ## Qt History
 
@@ -244,10 +244,23 @@ Basics of GUI app development in Python
 
 <https://doc.qt.io/qt-5/qtwidgets-graphicsview-diagramscene-example.html>
 
-## Pattern Matching Tool Demo
+## Pattern Matching Tool
 
 I created an app to run a pattern matching algorithm using OpenCV to
-select parts of a "target" image that are similar to a "pattern" image.
+select parts of a "target" image that are similar to a "pattern"
+image. There is a slider to interactively controlo the smilarity
+threshold, making it easier to discover the optimal threshold value to
+be used.
+
+![](../../../assets/images/2023-05-23-GUIs-in-PyQt5-pics/screenshot_pattern-matching.png)
+
+## Image Crop Tool
+
+I created an app to run the [ORB feature detection algorithm](https://en.wikipedia.org/wiki/Oriented_FAST_and_rotated_BRIEF)
+and automatically crop features from a list of images relative to a
+rectangle drawn on a reference image.
+
+![](../../../assets/images/2023-05-23-GUIs-in-PyQt5-pics/screenshot_image-crop.png)
 
 ## Conclusion
 
@@ -259,5 +272,3 @@ select parts of a "target" image that are similar to a "pattern" image.
   - Consider using if your project could be improved with simple
     interactive widgets.
 
-  - **The ML Platform team is interested in *your* reusable Qt
-    Widgets\!**
