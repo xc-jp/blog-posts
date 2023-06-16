@@ -1,5 +1,11 @@
-# Why I use PyQt
+layout: single
+title: Using PyQt for Native GUIs
+issue-date: 2023.06.16
+author: Ramin Honary
+tags: PyQt Qt Python GUI
+excerpt: Brief overview of how to use PyQt to rapidly develop GUI applications
 
+# Why I use PyQt
   - Developed some Python scripts that used **OpenCV**
       - "Pattern Matching Kit"
       - "Image Cropping Kit"
