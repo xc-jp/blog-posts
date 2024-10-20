@@ -492,6 +492,13 @@ Then the `result` will be either the array of records, or a list of errors expla
 >
 > [— Gary Burgess](https://discourse.purescript.org/t/how-to-read-cast-validate-json-in-purescript/2452/2)
 
+#### Update 2024 5. codec-json
+
+[codec-json](https://github.com/garyb/purescript-codec-json) is an improvement on **codec-argonaut**.
+
+#### Update 2024 6. yoga-json
+
+[yoga-json](https://github.com/rowtype-yoga/purescript-yoga-json) is an improvement on **simple-json**.
 
 ## vscode
 
