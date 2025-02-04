@@ -3,7 +3,7 @@ layout: single
 title: How to write PureScript React to replace TypeScript React in 2021
 issue-date: 2021.10.07
 author: James Brock
-tags: PureScript TypeScript React 
+tags: PureScript TypeScript React
 excerpt: Motivation of switching TypeScript to PureScript
 ---
 
@@ -40,7 +40,7 @@ external domain-specific languages:
 * *TSX*
 * *styled-components* or *emotion* templates
 
-Also, the TypeScript type system is underpowered and has too many escape 
+Also, the TypeScript type system is underpowered and has too many escape
 hatches. It’s been my
 observation that when TypeScript programmers are passing a string to a function
 they will dutifully annotate it as type `:string`, but when the types get
@@ -77,7 +77,7 @@ is a very good framework choice.
 
 There are many other PureScript immediate-mode GUI libraries. Most of them
 were written by Phil Freeman. __purescript-react-basic-hooks__ was written by
-Madeline Trotter, and it's the best PureScript immediate-mode GUI library. 
+Madeline Trotter, and it's the best PureScript immediate-mode GUI library.
 
 The most remarkable thing about __purescript-react-basic-hooks__ is the
 [`Hook`](https://pursuit.purescript.org/packages/purescript-react-basic-hooks/docs/React.Basic.Hooks#t:Hook) indexed monad.
@@ -96,7 +96,7 @@ What gives?
 __[Robert Porter](https://github.com/robertdp):__
 Calling a `Hook` in a loop is forbidden by the
 [*Rules of Hooks*](https://reactjs.org/docs/hooks-rules.html#only-call-hooks-at-the-top-level).
-That is why `Hook` is an indexed monad; because 
+That is why `Hook` is an indexed monad; because
 Madeline Trotter noticed that
 the algebraic structure of the indexed monad matches neatly with
 the *Rules of Hooks*, so she created the `Hook` indexed monad.
@@ -215,8 +215,8 @@ type ArtworksResponse = ArtworksData & ErrorHandling;
 We can use PureScript [Row Polymorphism](https://github.com/purescript/documentation/blob/master/language/Types.md#row-polymorphism) to create equivalent PureScript types
 with the same runtime representation.
 
-[//]: # as of 2022.07.30 Jekyll highligher rouge does not support purescript. So typescript is used instead below. Adding purescript.rb in plugins will not work
-```typescript
+<!-- as of 2022.07.30 Jekyll highligher rouge does not support purescript. So haskell is used instead below. Adding purescript.rb in plugins will not work -->
+```haskell
 type ErrorHandlingRow r =
   ( success :: Boolean
   , error :: Nullable { message :: String }
@@ -237,7 +237,7 @@ Suppose we have this TypeScript React component, and we want to wrap it
 so that we can call it from PureScript.
 
 __src/Tags.tsx__
-```typescript
+```haskell
 export interface Props_tags {
   tags: [string]
 }
@@ -250,8 +250,8 @@ To wrap the foreign `Tags` component in PureScript,
 create files `Tags_.purs` and `Tags_.js`.
 
 __src/Tags_.purs__
-[//]: # as of 2022.07.30 Jekyll highligher rouge does not support purescript. So typescript is used instead below. Adding purescript.rb in plugins will not work
-```typescript
+<!-- as of 2022.07.30 Jekyll highligher rouge does not support purescript. So haskell is used instead below. Adding purescript.rb in plugins will not work -->
+```haskell
 module Tags (tsxTags) where
 
 import React.Basic (ReactComponent)
@@ -276,8 +276,8 @@ files are foreign.)
 
 Then we can use the foreign component:
 
-[//]: # as of 2022.07.30 Jekyll highligher rouge does not support purescript. So typescript is used instead below. Adding purescript.rb in plugins will not work
-```typescript
+<!-- as of 2022.07.30 Jekyll highligher rouge does not support purescript. So haskell is used instead below. Adding purescript.rb in plugins will not work -->
+```haskell
 import React.Basic.DOM (div_)
 import React.Basic.Hooks (element)
 import Tags (tsxTags)
@@ -288,7 +288,7 @@ div_ [ element tsxTags {tags:["one"]} ]
 ### React diffing algorithm and `foreign import`
 
 Here is more helpful advice from [Robert Porter](https://github.com/robertdp),
-about typeclass 
+about typeclass
 constraints on foreign imports of React components. Recent versions of PureScript
 have [deprecated typeclass constraints on foreign import](https://github.com/purescript/purescript/pull/3829),
 so you probably don't have to worry about this, but here it is just in case.
@@ -370,8 +370,8 @@ so that we can `push` to a __react-router-dom__ `History` object.
 
 A bit tricky, so here is [the trick](https://lobste.rs/s/wa99yt/coming_purescript_from_haskell_reflex#c_faof1j):
 
-[//]: # as of 2022.07.30 Jekyll highligher rouge does not support purescript. So typescript is used instead below. Adding purescript.rb in plugins will not work
-```typescript
+<!-- as of 2022.07.30 Jekyll highligher rouge does not support purescript. So haskell is used instead below. Adding purescript.rb in plugins will not work -->
+```haskell
 import Web.DOM.Document (toNonElementParentNode)
 import Web.DOM.NonElementParentNode (getElementById)
 import Web.HTML (window)
@@ -396,8 +396,8 @@ to get the same feature.
 
 Suppose we want to remove an icon after a 20-second vanishing animation.
 
-[//]: # as of 2022.07.30 Jekyll highligher rouge does not support purescript. So typescript is used instead below. Adding purescript.rb in plugins will not work
-```typescript
+<!-- as of 2022.07.30 Jekyll highligher rouge does not support purescript. So haskell is used instead below. Adding purescript.rb in plugins will not work -->
+```haskell
 React.do
 
   icon /\ setIcon <- useState true
@@ -439,8 +439,8 @@ The classic essay on the general problem of how to read unstructured untyped dat
 
 The [`decodeJson`](https://pursuit.purescript.org/packages/purescript-argonaut/docs/Data.Argonaut#t:DecodeJson) function from __argonaut__ can infer the structure of the JSON you're expecting from the type of the data that you want to cast it to. If the structure of the JSON doesn't match the type, then it returns an error in `Left`.
 
-[//]: # as of 2022.07.30 Jekyll highligher rouge does not support purescript. So typescript is used instead below. Adding purescript.rb in plugins will not work
-```typescript
+<!-- as of 2022.07.30 Jekyll highligher rouge does not support purescript. So haskell is used instead below. Adding purescript.rb in plugins will not work -->
+```haskell
 show $ do
     x :: Array {a::Int,b::String} <- decodeJson =<< parseJson """[{"a":2,"b":"stuff"}]"""
     pure x
@@ -466,12 +466,12 @@ The automatic decoding in `Simple.JSON` is based on the[`ReadForeign`](https://p
 
 #### 3. F Monad
 
-The most powerful and general way to read foreign data is by writing monadic parsers for the [`F` monad](https://pursuit.purescript.org/packages/purescript-foreign/docs/Foreign#t:F).  You run the parser with [`runExcept`](https://pursuit.purescript.org/packages/purescript-transformers/docs/Control.Monad.Except#v:runExcept). 
+The most powerful and general way to read foreign data is by writing monadic parsers for the [`F` monad](https://pursuit.purescript.org/packages/purescript-foreign/docs/Foreign#t:F).  You run the parser with [`runExcept`](https://pursuit.purescript.org/packages/purescript-transformers/docs/Control.Monad.Except#v:runExcept).
 
 If `blob :: Foreign` is a JSON object which we expect to be an array of records, each with a string field named `"thing"`, then we can parse it into PureScript with the `F` monad like this:
 
-[//]: # as of 2022.07.30 Jekyll highligher rouge does not support purescript. So typescript is used instead below. Adding purescript.rb in plugins will not work
-```typescript
+<!-- as of 2022.07.30 Jekyll highligher rouge does not support purescript. So haskell is used instead below. Adding purescript.rb in plugins will not work -->
+```haskell
 import Foreign (Foreign, readArray, readString)
 import Foreign.Index (readProp)
 import Control.Monad.Except (runExcept)
@@ -571,5 +571,3 @@ __emotion__.
 | String interpolation | | [__interpolate__](https://pursuit.purescript.org/packages/purescript-interpolate/) |
 | Loader for WebPack | | [__purs-loader__](https://github.com/ethul/purs-loader) [__craco-purscript-loader__](https://github.com/andys8/craco-purescript-loader) |
 | State Management | [__@types/react-redux__](https://www.npmjs.com/package/@types/react-redux) | React is already a state management framework, you don’t need __redux__ or anything else. Use a State Hook instead.|
-
-
