@@ -142,7 +142,7 @@ async_read_vector_n(tcp::socket &socket, asio::streambuf &b, size_t n) {
 
 If you like this imperative one-thing-after-another style of asynchronous TCP socket reading but C++20 
 is a bit too bleeding-edge for you to use at work, then I recommend the GHC Haskell compiler,
-in which [all I/O can by run asynchronously](https://bitbashing.io/haskell-concurrency.html).
+in which [all I/O can be run asynchronously](https://bitbashing.io/haskell-concurrency.html).
 
 ## Some further coroutine reading
 
