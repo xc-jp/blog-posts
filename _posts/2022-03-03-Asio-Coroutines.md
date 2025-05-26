@@ -79,8 +79,8 @@ async_read_string_until(tcp::socket &socket, asio::streambuf &b, char delim) {
   asio::streambuf::const_buffers_type ibuf = b.data();
   std::string s(
       asio::buffers_begin(ibuf),
-      asio::buffers_begin(ibuf) +
-          (bytes_transferred - 1));
+      asio::buffers_begin(ibuf) + (bytes_transferred - 1)
+  );
   b.consume(bytes_transferred);
   co_return s;
 }
@@ -142,18 +142,18 @@ async_read_vector_n(tcp::socket &socket, asio::streambuf &b, size_t n) {
 
 If you like this imperative one-thing-after-another style of asynchronous TCP socket reading but C++20 
 is a bit too bleeding-edge for you to use at work, then I recommend the GHC Haskell compiler,
-in which all network I/O is always asynchronous.
+in which [all I/O can by run asynchronously](https://bitbashing.io/haskell-concurrency.html).
 
 ## Some further coroutine reading
 
-https://www.boost.org/doc/libs/1_78_0/doc/html/boost_asio.html
-https://dens.website/tutorials/cpp-asio/read-write
-https://dens.website/tutorials/cpp-asio/read-write-2
-https://dens.website/tutorials/cpp-asio/read-write-3
-https://www.scs.stanford.edu/~dm/blog/c++-coroutines.html
-http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2021/p2444r0.pdf
-https://lastviking.eu/asio_composed.html
-https://ericniebler.com/2020/11/08/structured-concurrency/
-https://blog.panicsoftware.com/coroutines-introduction/
-https://lewissbaker.github.io/
+- https://www.boost.org/doc/libs/1_78_0/doc/html/boost_asio.html
+- https://dens.website/tutorials/cpp-asio/read-write
+- https://dens.website/tutorials/cpp-asio/read-write-2
+- https://dens.website/tutorials/cpp-asio/read-write-3
+- https://www.scs.stanford.edu/~dm/blog/c++-coroutines.html
+- http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2021/p2444r0.pdf
+- https://lastviking.eu/asio_composed.html
+- https://ericniebler.com/2020/11/08/structured-concurrency/
+- https://blog.panicsoftware.com/coroutines-introduction/
+- https://lewissbaker.github.io/
 
